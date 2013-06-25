@@ -1,0 +1,3 @@
+@echo off
+"%UserProfile%\Documents\GitHub\ChampManager\Champ Manager\Resources\RABCDAsm_v1.13\rabcasm" "%UserProfile%\Documents\GitHub\ChampManager\Champ Manager\Test Space\AirGeneratedContent-0\AirGeneratedContent-0.main.asasm"
+"%UserProfile%\Documents\GitHub\ChampManager\Champ Manager\Resources\RABCDAsm_v1.13\abcreplace" "%UserProfile%\Documents\GitHub\ChampManager\Champ Manager\Test Space\AirGeneratedContent.swf" 0 "%UserProfile%\Documents\GitHub\ChampManager\Champ Manager\Test Space\AirGeneratedContent-0\AirGeneratedContent-0.main.abc"
