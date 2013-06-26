@@ -5,6 +5,7 @@
 #include <QStringListModel>
 #include "LCMChampion.h"
 #include "LCMCategory.h"
+#include "addcategorydialog.h"
 
 
 namespace Ui {
@@ -14,7 +15,10 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    
+
+public slots:
+	void openNewCategoryWindow(std::string &category);
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     void UpdatePrimaryList_Champion(void);
@@ -28,21 +32,23 @@ public:
     ~MainWindow();
     
 private slots:
-    void on_btn_AddCategory_clicked();
-    void on_btn_RemoveCategory_clicked();
-    void on_btn_AddChamp_clicked();
-    void on_btn_RemoveChamp_clicked();
+    void on_addPrimary_clicked();
+    void on_removePrimary_clicked();
+    void on_addSecondary_clicked();
+    void on_removeSecondary_clicked();
+	void on_restore_clicked();
+	void on_apply_clicked();
 	void on_rad_byCategory_selected(bool checked);
 	void on_rad_byChampion_selected(bool checked);
+
 
     void on_list_primary_changed(QModelIndex index);
 
 private:
     Ui::MainWindow *ui;
+	addCategoryDialog *newCategoryDialog;
     QStringListModel* m_model;
 	QStringListModel* m_smodel;
-    QStringList m_championNames;
-    QStringList m_searchTags;
     std::vector<LCMChampion> m_championInventory;
 	std::vector<LCMCategory> m_categoryInventory;
 

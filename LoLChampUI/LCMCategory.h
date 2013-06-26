@@ -18,8 +18,11 @@ class LCMCategory {
 
 	public:
 		LCMCategory(std::string category, std::vector<std::string> championList);
+		LCMCategory(std::string category);
 		void setChampionList(std::vector<std::string> championList);
 		void setCategory(std::string category);
+		void addChampion(std::string newChampion);
+		void removeChampion(std::string oldChampion);
 		std::string getCategory(void);
 		std::vector<std::string> getChampionList(void);
 };

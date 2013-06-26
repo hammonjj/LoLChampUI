@@ -30,12 +30,14 @@ public:
     QWidget *centralWidget;
     QListView *list_primary;
     QListView *list_secondary;
-    QPushButton *btn_AddCategory;
-    QPushButton *btn_RemoveCategory;
-    QPushButton *btn_AddChamp;
-    QPushButton *btn_RemoveChamp;
+    QPushButton *btn_addPrimary;
+    QPushButton *btn_removePrimary;
+    QPushButton *btn_addSecondary;
+    QPushButton *btn_removeSecondary;
     QRadioButton *rad_byChampion;
     QRadioButton *rad_byCategory;
+    QPushButton *btn_apply;
+    QPushButton *btn_restore;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
 
@@ -43,7 +45,11 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(262, 462);
+        MainWindow->resize(262, 425);
+        MainWindow->setMinimumSize(QSize(262, 425));
+        MainWindow->setMaximumSize(QSize(262, 425));
+        MainWindow->setTabShape(QTabWidget::Rounded);
+        MainWindow->setUnifiedTitleAndToolBarOnMac(false);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         list_primary = new QListView(centralWidget);
@@ -52,20 +58,19 @@ public:
         list_secondary = new QListView(centralWidget);
         list_secondary->setObjectName(QStringLiteral("list_secondary"));
         list_secondary->setGeometry(QRect(20, 150, 181, 221));
-        btn_AddCategory = new QPushButton(centralWidget);
-        btn_AddCategory->setObjectName(QStringLiteral("btn_AddCategory"));
-        btn_AddCategory->setGeometry(QRect(210, 40, 21, 23));
-        //btn_AddCategory->setEnabled(false);
-        btn_RemoveCategory = new QPushButton(centralWidget);
-        btn_RemoveCategory->setObjectName(QStringLiteral("btn_RemoveCategory"));
-        btn_RemoveCategory->setGeometry(QRect(210, 70, 21, 23));
-		//btn_RemoveCategory->setEnabled(false);
-        btn_AddChamp = new QPushButton(centralWidget);
-        btn_AddChamp->setObjectName(QStringLiteral("btn_AddChamp"));
-        btn_AddChamp->setGeometry(QRect(210, 150, 21, 23));
-        btn_RemoveChamp = new QPushButton(centralWidget);
-        btn_RemoveChamp->setObjectName(QStringLiteral("btn_RemoveChamp"));
-        btn_RemoveChamp->setGeometry(QRect(210, 180, 21, 23));
+        btn_addPrimary = new QPushButton(centralWidget);
+        btn_addPrimary->setObjectName(QStringLiteral("btn_addPrimary"));
+        btn_addPrimary->setGeometry(QRect(210, 40, 21, 23));
+        btn_addPrimary->setCheckable(false);
+        btn_removePrimary = new QPushButton(centralWidget);
+        btn_removePrimary->setObjectName(QStringLiteral("btn_removePrimary"));
+        btn_removePrimary->setGeometry(QRect(210, 70, 21, 23));
+        btn_addSecondary = new QPushButton(centralWidget);
+        btn_addSecondary->setObjectName(QStringLiteral("btn_addSecondary"));
+        btn_addSecondary->setGeometry(QRect(210, 150, 21, 23));
+        btn_removeSecondary = new QPushButton(centralWidget);
+        btn_removeSecondary->setObjectName(QStringLiteral("btn_removeSecondary"));
+        btn_removeSecondary->setGeometry(QRect(210, 180, 21, 23));
         rad_byChampion = new QRadioButton(centralWidget);
         rad_byChampion->setObjectName(QStringLiteral("rad_byChampion"));
         rad_byChampion->setGeometry(QRect(20, 10, 82, 17));
@@ -73,6 +78,12 @@ public:
         rad_byCategory = new QRadioButton(centralWidget);
         rad_byCategory->setObjectName(QStringLiteral("rad_byCategory"));
         rad_byCategory->setGeometry(QRect(110, 10, 82, 17));
+        btn_apply = new QPushButton(centralWidget);
+        btn_apply->setObjectName(QStringLiteral("btn_apply"));
+        btn_apply->setGeometry(QRect(30, 380, 75, 23));
+        btn_restore = new QPushButton(centralWidget);
+        btn_restore->setObjectName(QStringLiteral("btn_restore"));
+        btn_restore->setGeometry(QRect(115, 380, 75, 23));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -89,13 +100,15 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "LoL Champ Manager", 0));
-        btn_AddCategory->setText(QApplication::translate("MainWindow", "+", 0));
-        btn_RemoveCategory->setText(QApplication::translate("MainWindow", "-", 0));
-        btn_AddChamp->setText(QApplication::translate("MainWindow", "+", 0));
-        btn_RemoveChamp->setText(QApplication::translate("MainWindow", "-", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "LOL Champ Manager", 0));
+        btn_addPrimary->setText(QApplication::translate("MainWindow", "+", 0));
+        btn_removePrimary->setText(QApplication::translate("MainWindow", "-", 0));
+        btn_addSecondary->setText(QApplication::translate("MainWindow", "+", 0));
+        btn_removeSecondary->setText(QApplication::translate("MainWindow", "-", 0));
         rad_byChampion->setText(QApplication::translate("MainWindow", "By Champion", 0));
         rad_byCategory->setText(QApplication::translate("MainWindow", "By Category", 0));
+        btn_apply->setText(QApplication::translate("MainWindow", "Apply", 0));
+        btn_restore->setText(QApplication::translate("MainWindow", "Restore", 0));
     } // retranslateUi
 
 };

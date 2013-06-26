@@ -36,37 +36,22 @@
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Generated Files\Debug">
-      <UniqueIdentifier>{531599a1-ab5a-46f0-9414-b074d1a0c0a3}</UniqueIdentifier>
+      <UniqueIdentifier>{3dd2e567-2e07-4e40-9700-97397da15818}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
     <Filter Include="Generated Files\Release">
-      <UniqueIdentifier>{5c0f5afe-a19b-4067-bb44-0fbb3d308550}</UniqueIdentifier>
+      <UniqueIdentifier>{0c58b130-2af9-4f8c-a718-b2a0c0cf3786}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="addcategorydialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mainwindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="LCMCategory.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LCMChampion.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="asasmlibrary.cpp">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_addcategorydialog.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -74,38 +59,20 @@
     <ClCompile Include="GeneratedFiles\Release\moc_addcategorydialog.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Interface\addcategorydialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="mainwindow.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Interface\addcategorydialog.h">
+    <CustomBuild Include="addcategorydialog.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="mainwindow.ui">
+    <CustomBuild Include="addcategorydialog.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
+    <ClInclude Include="GeneratedFiles\ui_addcategorydialog.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LCMCategory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LCMChampion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="asasmlibrary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="toolbox.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

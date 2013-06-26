@@ -14,13 +14,21 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-	ui->btn_AddCategory->setEnabled(false);
-	ui->btn_RemoveCategory->setEnabled(false);
+	ui->btn_addPrimary->setEnabled(false);
+	ui->btn_removePrimary->setEnabled(false);
 	ui->list_primary->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	ui->list_secondary->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
 	//Event Listeners
 	connect(ui->list_primary,SIGNAL(clicked(const QModelIndex)),this,SLOT(on_list_primary_changed(QModelIndex)));  
+
+	connect(ui->btn_addPrimary,SIGNAL(clicked()),this,SLOT(on_addPrimary_clicked()));  
+	connect(ui->btn_removePrimary,SIGNAL(clicked()),this,SLOT(on_addSecondary_clicked()));  
+	connect(ui->btn_addSecondary,SIGNAL(clicked()),this,SLOT(on_addSecondary_clicked()));  
+	connect(ui->btn_removeSecondary,SIGNAL(clicked()),this,SLOT(on_removeSecondary_clicked()));  
+	connect(ui->btn_apply,SIGNAL(clicked()),this,SLOT(on_apply_clicked()));  
+	connect(ui->btn_restore,SIGNAL(clicked()),this,SLOT(on_restore_clicked()));  
+
 	connect(ui->rad_byChampion,SIGNAL(toggled(bool)),this,SLOT(on_rad_byChampion_selected(bool)));  
 	connect(ui->rad_byCategory,SIGNAL(toggled(bool)),this,SLOT(on_rad_byCategory_selected(bool)));  
 
@@ -106,30 +114,75 @@ void MainWindow::listByCategory(void) {
 
 //Event Listener Methods
 /**********************************************************************************************************/
-void MainWindow::on_btn_AddCategory_clicked()
+void MainWindow::on_addPrimary_clicked()
 {
+	bool bByCategory = ui->rad_byCategory->isChecked();
+	if(bByCategory == true) {
+		//Create addCategoryDialog box
+		std::string category;
+		openNewCategoryWindow(category);
+		
+		LCMCategory tempCat(category);
+		m_categoryInventory.push_back(tempCat);
+	}
 
+	if(ui->rad_byChampion->isChecked()) {
+		return;
+	}
 }
 
-void MainWindow::on_btn_RemoveCategory_clicked()
-{
-
+void MainWindow::openNewCategoryWindow(std::string &category) {
+	newCategoryDialog = new addCategoryDialog();
+	newCategoryDialog->show();
+	category = newCategoryDialog->getCategoryString();
 }
 
-void MainWindow::on_btn_AddChamp_clicked()
+void MainWindow::on_removePrimary_clicked()
 {
+	if(ui->rad_byCategory->isChecked()) {
+		//Remove Category from list
+	}
 
+	if(ui->rad_byChampion->isChecked()) {
+		return;
+	}
 }
 
-void MainWindow::on_btn_RemoveChamp_clicked()
+void MainWindow::on_addSecondary_clicked()
 {
+	if(ui->rad_byCategory->isChecked()) {
+		//Create addCategoryDialog box
+	}
 
+	if(ui->rad_byChampion->isChecked()) {
+		//Create addChampionDialog box
+	}
+}
+
+void MainWindow::on_removeSecondary_clicked()
+{
+	int x=0;
+	if(ui->rad_byCategory->isChecked()) {
+		
+	}
+
+	if(ui->rad_byChampion->isChecked()) {
+		//Create addChampionDialog box
+	}
+}
+
+void MainWindow::on_restore_clicked() {
+	//Restore original riot .swf file
+}
+
+void MainWindow::on_apply_clicked() {
+	//Make changes to asasm vector and assemble file
 }
 
 void MainWindow::on_rad_byCategory_selected(bool checked) {
 	if(checked == true) {
-		ui->btn_AddCategory->setEnabled(true);
-		ui->btn_RemoveCategory->setEnabled(true);
+		ui->btn_addPrimary->setEnabled(true);
+		ui->btn_removePrimary->setEnabled(true);
 
 		clear_secondaryList();
 		UpdatePrimaryList_Category();
@@ -138,8 +191,8 @@ void MainWindow::on_rad_byCategory_selected(bool checked) {
 
 void MainWindow::on_rad_byChampion_selected(bool checked) {
 	if(checked == true) {
-		ui->btn_AddCategory->setEnabled(false);
-		ui->btn_RemoveCategory->setEnabled(false);
+		ui->btn_addPrimary->setEnabled(false);
+		ui->btn_removePrimary->setEnabled(false);
 
 		clear_secondaryList();
 		UpdatePrimaryList_Champion();
