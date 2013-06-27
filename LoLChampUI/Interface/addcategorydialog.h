@@ -10,7 +10,10 @@ class addCategoryDialog;
 class addCategoryDialog : public QDialog
 {
     Q_OBJECT
-    
+
+signals:
+	void newCategoryString();
+
 public:
     explicit addCategoryDialog(QWidget *parent = 0);
 	void setCategoryString(std::string category);

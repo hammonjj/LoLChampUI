@@ -17,7 +17,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public slots:
-	void openNewCategoryWindow(std::string &category);
+	void openNewCategoryWindow();
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -40,7 +40,7 @@ private slots:
 	void on_apply_clicked();
 	void on_rad_byCategory_selected(bool checked);
 	void on_rad_byChampion_selected(bool checked);
-
+	void on_categoryUpdate();
 
     void on_list_primary_changed(QModelIndex index);
 

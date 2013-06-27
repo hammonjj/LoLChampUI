@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+	newCategoryDialog = new addCategoryDialog();
+
 	ui->btn_addPrimary->setEnabled(false);
 	ui->btn_removePrimary->setEnabled(false);
 	ui->list_primary->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -23,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->list_primary,SIGNAL(clicked(const QModelIndex)),this,SLOT(on_list_primary_changed(QModelIndex)));  
 
 	connect(ui->btn_addPrimary,SIGNAL(clicked()),this,SLOT(on_addPrimary_clicked()));  
-	connect(ui->btn_removePrimary,SIGNAL(clicked()),this,SLOT(on_addSecondary_clicked()));  
+	connect(ui->btn_removePrimary,SIGNAL(clicked()),this,SLOT(on_removePrimary_clicked()));  
 	connect(ui->btn_addSecondary,SIGNAL(clicked()),this,SLOT(on_addSecondary_clicked()));  
 	connect(ui->btn_removeSecondary,SIGNAL(clicked()),this,SLOT(on_removeSecondary_clicked()));  
 	connect(ui->btn_apply,SIGNAL(clicked()),this,SLOT(on_apply_clicked()));  
@@ -32,13 +34,15 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->rad_byChampion,SIGNAL(toggled(bool)),this,SLOT(on_rad_byChampion_selected(bool)));  
 	connect(ui->rad_byCategory,SIGNAL(toggled(bool)),this,SLOT(on_rad_byCategory_selected(bool)));  
 
+	connect(newCategoryDialog,SIGNAL(newCategoryString()),this,SLOT(on_categoryUpdate())); 
+
 }
 
 MainWindow::~MainWindow()
 {
+
     delete ui;
 }
-
 
 void MainWindow::clear_secondaryList(void) {
 	m_smodel = new QStringListModel(ui->list_secondary);
@@ -114,33 +118,68 @@ void MainWindow::listByCategory(void) {
 
 //Event Listener Methods
 /**********************************************************************************************************/
+void MainWindow::on_categoryUpdate() {
+	std::string category = newCategoryDialog->getCategoryString();
+	LCMCategory tempCat(category);
+	m_categoryInventory.push_back(tempCat);
+	
+	delete newCategoryDialog;
+
+	UpdatePrimaryList_Category();
+	clear_secondaryList();
+	
+}
+
 void MainWindow::on_addPrimary_clicked()
 {
 	bool bByCategory = ui->rad_byCategory->isChecked();
+
 	if(bByCategory == true) {
 		//Create addCategoryDialog box
-		std::string category;
-		openNewCategoryWindow(category);
-		
-		LCMCategory tempCat(category);
-		m_categoryInventory.push_back(tempCat);
+		newCategoryDialog->show();
 	}
 
 	if(ui->rad_byChampion->isChecked()) {
 		return;
 	}
+
 }
 
-void MainWindow::openNewCategoryWindow(std::string &category) {
-	newCategoryDialog = new addCategoryDialog();
-	newCategoryDialog->show();
-	category = newCategoryDialog->getCategoryString();
+void MainWindow::openNewCategoryWindow() {
+
+
 }
 
 void MainWindow::on_removePrimary_clicked()
 {
 	if(ui->rad_byCategory->isChecked()) {
 		//Remove Category from list
+		QModelIndex itemSelected = ui->list_primary->selectionModel()->currentIndex();
+
+		bool valid = itemSelected.isValid();
+		if(valid == false) return;
+
+		std::string itemSelectedString = itemSelected.data().toString().toUtf8();
+
+		int row = itemSelected.row();
+		
+		//itemSelected.removeAt(0);
+		m_categoryInventory.erase(m_categoryInventory.begin()+row, m_categoryInventory.begin()+row+1); 
+
+		//Remove champions from category
+		for(int i = 0; i < m_championInventory.size(); i++) {
+			std::vector<std::string> tempTags = m_championInventory[i].getSearchTags();
+				for(int j = 0; j < tempTags.size(); j++) {
+					if(itemSelectedString == tempTags[j]) {
+						tempTags.erase(tempTags.begin()+j, tempTags.begin()+j+1);
+						m_championInventory[i].setSearchTags(tempTags);
+					}
+				}
+		}
+
+		//Refresh View
+		UpdatePrimaryList_Category();
+		clear_secondaryList();
 	}
 
 	if(ui->rad_byChampion->isChecked()) {
@@ -161,7 +200,6 @@ void MainWindow::on_addSecondary_clicked()
 
 void MainWindow::on_removeSecondary_clicked()
 {
-	int x=0;
 	if(ui->rad_byCategory->isChecked()) {
 		
 	}

@@ -20,15 +20,14 @@ void addCategoryDialog::on_btn_accept_clicked()
 {
 	QString newCategory = ui->edit_categoryText->text();
 	m_category = newCategory.toUtf8();
-
+	
 	close();
-
+	emit newCategoryString();
 }
 
 void addCategoryDialog::on_btn_cancel_clicked()
 {
 	close();
-
 }
 
 void addCategoryDialog::setCategoryString(std::string category) {
