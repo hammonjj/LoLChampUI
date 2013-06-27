@@ -43,7 +43,7 @@ MainWindow::~MainWindow()
 
     delete ui;
 }
-
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::clear_secondaryList(void) {
 	m_smodel = new QStringListModel(ui->list_secondary);
     QString str = " ";
@@ -53,6 +53,7 @@ void MainWindow::clear_secondaryList(void) {
     ui->list_secondary->setModel(m_smodel);
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::UpdatePrimaryList_Champion(void) {
     m_model = new QStringListModel(ui->list_primary);
 	QStringList l_championNames;
@@ -62,6 +63,7 @@ void MainWindow::UpdatePrimaryList_Champion(void) {
     ui->list_primary->setModel(m_model);
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::UpdatePrimaryList_Category(void) {
     m_model = new QStringListModel(ui->list_primary);
     QStringList l_categoryNames;
@@ -71,6 +73,7 @@ void MainWindow::UpdatePrimaryList_Category(void) {
     ui->list_primary->setModel(m_model);
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::pullChampionNames(QStringList &l_championNames) {
     std::string nameString;
     QString str;
@@ -85,6 +88,7 @@ void MainWindow::pullChampionNames(QStringList &l_championNames) {
     }
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::pullCategoryNames(QStringList &l_categoryNames) {
     std::string categoryString;
     QString str;
@@ -99,19 +103,23 @@ void MainWindow::pullCategoryNames(QStringList &l_categoryNames) {
     }
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::setChampionInventory(std::vector<LCMChampion> &championInventory) {
 	 m_championInventory = championInventory;
 	 UpdatePrimaryList_Champion();
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::setCategoryInventory(std::vector<LCMCategory> &categoryInventory) {
 	m_categoryInventory = categoryInventory;
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::listByChampion(void) {
 	ui->list_primary->setModel(m_model);
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::listByCategory(void) {
 	ui->list_secondary->setModel(m_model);
 }
@@ -130,6 +138,7 @@ void MainWindow::on_categoryUpdate() {
 	
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_addPrimary_clicked()
 {
 	bool bByCategory = ui->rad_byCategory->isChecked();
@@ -145,11 +154,7 @@ void MainWindow::on_addPrimary_clicked()
 
 }
 
-void MainWindow::openNewCategoryWindow() {
-
-
-}
-
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_removePrimary_clicked()
 {
 	if(ui->rad_byCategory->isChecked()) {
@@ -183,10 +188,12 @@ void MainWindow::on_removePrimary_clicked()
 	}
 
 	if(ui->rad_byChampion->isChecked()) {
+		//Currently disabled so users can't remove champions
 		return;
 	}
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_addSecondary_clicked()
 {
 	if(ui->rad_byCategory->isChecked()) {
@@ -198,25 +205,84 @@ void MainWindow::on_addSecondary_clicked()
 	}
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_removeSecondary_clicked()
 {
+	//Remove champion from category
 	if(ui->rad_byCategory->isChecked()) {
+		QModelIndex categorySelected = ui->list_primary->selectionModel()->currentIndex();
+		QModelIndex championSelected = ui->list_secondary->selectionModel()->currentIndex();
+
+		bool champValid = championSelected.isValid();
+		bool catValid = categorySelected.isValid();
+		if(champValid == false || catValid == false) return;
+
+		std::string championSelectedString = championSelected.data().toString().toUtf8();
+		int champRow = championSelected.row();
+		int categoryRow = categorySelected.row();
 		
+		std::string categorySelectedString = categorySelected.data().toString().toUtf8();
+		
+		//Remove champion from m_categoryInventory
+		for(int i = 0; i < m_categoryInventory.size(); i++) {
+			if(categorySelectedString == m_categoryInventory[i].getCategoryName()) {
+				std::vector<std::string> championList = m_categoryInventory[i].getChampionList();
+				for(int j = 0; j < championList.size(); j++) {
+					if(championSelectedString == championList[j]) {
+						championList.erase(championList.begin()+j, championList.begin()+j+1);
+						m_categoryInventory[i].setChampionList(championList);
+					}
+				}
+		}
+		
+		//Remove category from m_championInventory
+		for(int i = 0; i < m_championInventory.size(); i++) {
+			if(championSelectedString == m_championInventory[i].getChampionName()) {
+				std::vector<std::string> categoryList = m_championInventory[i].getCategoryList();
+				for(int j; j < categoryList.size(); j++) {
+					if(categorySelectedString == categoryList[j]) {
+						categoryList.erase(categoryList.begin()+j, categoryList.begin()+j+1);
+						m_championInventory[i].setCategoryList(categoryList);
+					}
+				}
+			}
+		}
+		
+		//Refresh view, function still needs to be created
+		//UpdateSecondaryList_Category();
+		m_smodel = new QStringListModel(ui->list_secondary);
+
+		QStringList championList;
+
+		std::vector<std::string> championList_s = m_categoryInventory[categoryRow].getChampionList();
+
+		for(int i = 0; i < championList_s.size(); i++) {
+			QString str = QString::fromUtf8(championList_s[i].c_str());
+			championList.append(str);
+		}
+
+		//Add converted name to model
+		m_smodel->setStringList(championList);
+		ui->list_secondary->setModel(m_smodel);
 	}
 
+	//Remove category from champion
 	if(ui->rad_byChampion->isChecked()) {
-		//Create addChampionDialog box
+		
 	}
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_restore_clicked() {
 	//Restore original riot .swf file
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_apply_clicked() {
 	//Make changes to asasm vector and assemble file
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_rad_byCategory_selected(bool checked) {
 	if(checked == true) {
 		ui->btn_addPrimary->setEnabled(true);
@@ -227,6 +293,7 @@ void MainWindow::on_rad_byCategory_selected(bool checked) {
 	}
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_rad_byChampion_selected(bool checked) {
 	if(checked == true) {
 		ui->btn_addPrimary->setEnabled(false);
@@ -237,6 +304,7 @@ void MainWindow::on_rad_byChampion_selected(bool checked) {
 	}
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_list_primary_changed(QModelIndex index)
 {
 	bool byChampionToggled = ui->rad_byChampion->isChecked();
