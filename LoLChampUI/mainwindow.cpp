@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 	newCategoryDialog = new addCategoryDialog();
+	newChampionDialog = new UICAddChampionDialog();
 
 	ui->btn_addPrimary->setEnabled(false);
 	ui->btn_removePrimary->setEnabled(false);
@@ -35,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->rad_byCategory,SIGNAL(toggled(bool)),this,SLOT(on_rad_byCategory_selected(bool)));  
 
 	connect(newCategoryDialog,SIGNAL(newCategoryString()),this,SLOT(on_categoryUpdate())); 
+	connect(newChampionDialog, SIGNAL(newChampionString()),this,SLOT(on_championUpdate()));
 
 }
 
@@ -138,6 +140,10 @@ void MainWindow::on_categoryUpdate() {
 	
 }
 
+void MainWindow::on_championUpdate() {
+	delete newChampionDialog;
+	//UpdateSecondaryList_Champion();
+}
 /////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_addPrimary_clicked()
 {
@@ -197,7 +203,7 @@ void MainWindow::on_removePrimary_clicked()
 void MainWindow::on_addSecondary_clicked()
 {
 	if(ui->rad_byCategory->isChecked()) {
-		//Create addCategoryDialog box
+		newChampionDialog->show();
 	}
 
 	if(ui->rad_byChampion->isChecked()) {
@@ -225,7 +231,7 @@ void MainWindow::on_removeSecondary_clicked()
 		
 		//Remove champion from m_categoryInventory
 		for(int i = 0; i < m_categoryInventory.size(); i++) {
-			if(categorySelectedString == m_categoryInventory[i].getCategoryName()) {
+			if(categorySelectedString == m_categoryInventory[i].getCategory()) {
 				std::vector<std::string> championList = m_categoryInventory[i].getChampionList();
 				for(int j = 0; j < championList.size(); j++) {
 					if(championSelectedString == championList[j]) {
@@ -233,16 +239,21 @@ void MainWindow::on_removeSecondary_clicked()
 						m_categoryInventory[i].setChampionList(championList);
 					}
 				}
+			}
 		}
 		
+		bool complete = false;
 		//Remove category from m_championInventory
 		for(int i = 0; i < m_championInventory.size(); i++) {
-			if(championSelectedString == m_championInventory[i].getChampionName()) {
-				std::vector<std::string> categoryList = m_championInventory[i].getCategoryList();
-				for(int j; j < categoryList.size(); j++) {
+			if(complete == true) { break; }
+
+			if(championSelectedString == m_championInventory[i].getChampName()) {
+				std::vector<std::string> categoryList = m_championInventory[i].getSearchTags();
+				for(int j = 0; j < categoryList.size(); j++) {
 					if(categorySelectedString == categoryList[j]) {
 						categoryList.erase(categoryList.begin()+j, categoryList.begin()+j+1);
-						m_championInventory[i].setCategoryList(categoryList);
+						m_championInventory[i].setSearchTags(categoryList);
+						complete = true;
 					}
 				}
 			}

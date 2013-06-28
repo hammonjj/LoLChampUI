@@ -6,7 +6,8 @@
 #include "LCMChampion.h"
 #include "LCMCategory.h"
 #include "addcategorydialog.h"
-
+#include "UICAddChampionDialog.h"
+#include "ui_UICAddChampionDialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,8 +17,9 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public slots:
-	void openNewCategoryWindow();
+//public slots:
+//	void openNewCategoryWindow();
+//	void openNewChampionWindow();
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -41,12 +43,14 @@ private slots:
 	void on_rad_byCategory_selected(bool checked);
 	void on_rad_byChampion_selected(bool checked);
 	void on_categoryUpdate();
+	void on_championUpdate();
 
     void on_list_primary_changed(QModelIndex index);
 
 private:
     Ui::MainWindow *ui;
 	addCategoryDialog *newCategoryDialog;
+	UICAddChampionDialog *newChampionDialog;
     QStringListModel* m_model;
 	QStringListModel* m_smodel;
     std::vector<LCMChampion> m_championInventory;
