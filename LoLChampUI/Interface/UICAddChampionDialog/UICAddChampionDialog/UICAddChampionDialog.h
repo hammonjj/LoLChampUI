@@ -12,7 +12,7 @@ class UICAddChampionDialog : public QDialog
     Q_OBJECT
     
 signals:
-	void newChampionString();
+	void on_championListRecieved(std::vector<std::string> championList);
 
 public:
     explicit UICAddChampionDialog(QWidget *parent = 0);

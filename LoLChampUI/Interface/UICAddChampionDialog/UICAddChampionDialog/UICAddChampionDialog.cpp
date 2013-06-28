@@ -9,11 +9,22 @@ UICAddChampionDialog::UICAddChampionDialog(QWidget *parent) :
 
     connect(ui->btn_cancel,SIGNAL(clicked()),this,SLOT(on_btn_cancel_clicked()));
     connect(ui->btn_accept,SIGNAL(clicked()),this,SLOT(on_btn_accept_clicked()));
+	
+	connect(w, SIGNAL(currentCategories(std::vector<std::string>)),this,SLOT(on_championListRecieved(std::vector<std::string>)));
 }
 
 UICAddChampionDialog::~UICAddChampionDialog()
 {
     delete ui;
+}
+
+void UICAddChampionDialog::on_championListRecieved(std::vector<std::string> championList)
+{
+	for(int i = 0; i < championList.size(); i++) 
+	{
+		//Add vector strings to combo box.
+		//myComboBox->addItem(myString);
+	}
 }
 
 void UICAddChampionDialog::on_btn_cancel_clicked()
