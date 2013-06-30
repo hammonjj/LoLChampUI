@@ -25,6 +25,7 @@ class asasmlibrary {
 		void changeSearchTags(std::vector<std::string> champtionSearchTags, std::vector<std::string> &asamInputFile, std::string championName); //!< Searches asamInput vector for a bookmark location (championName) and replaces the entries below it with championSearchTag indexes
 		void readSearchTags(const std::string champName, std::vector<std::string> &searchTags); //!< Stub for function that will read XML data file
 		void readCategoryList(std::vector<std::string> &categoryList);
+		void getAsasmFile(std::vector<std::string> &asamFile);
 
 		~asasmlibrary(){;};
 };

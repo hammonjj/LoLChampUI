@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
 
     vector<string> championList;
     vector<string> championSearchTags;
+	std::vector<std::string> asasmFile;
     vector<LCMChampion> championInventory;
 
     vector<LCMCategory> categoryInventory;
@@ -46,10 +47,14 @@ int main(int argc, char *argv[])
 
     championHandler(championList, championSearchTags, championInventory);
     categoryHandler(categoryList, categoryInventory, championInventory);   
-
+	
+	//ChampionGeneratedData->getAsasmFile(asasmFile);
+ 
     w.setChampionInventory(championInventory);
 	w.setCategoryInventory(categoryInventory);
-
+	w.setChampionList(championList);
+	w.setCategoryList(categoryList);
+	w.setAsasmLibrary(ChampionGeneratedData);
     delete ChampionGeneratedData;
 
     return a.exec();

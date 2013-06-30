@@ -9,8 +9,9 @@ UICAddChampionDialog::UICAddChampionDialog(QWidget *parent) :
 
     connect(ui->btn_cancel,SIGNAL(clicked()),this,SLOT(on_btn_cancel_clicked()));
     connect(ui->btn_accept,SIGNAL(clicked()),this,SLOT(on_btn_accept_clicked()));
-	
-	connect(w, SIGNAL(currentCategories(std::vector<std::string>)),this,SLOT(on_championListRecieved(std::vector<std::string>)));
+
+	this->raise();
+	this->setFocus();
 }
 
 UICAddChampionDialog::~UICAddChampionDialog()
@@ -18,13 +19,33 @@ UICAddChampionDialog::~UICAddChampionDialog()
     delete ui;
 }
 
-void UICAddChampionDialog::on_championListRecieved(std::vector<std::string> championList)
+void UICAddChampionDialog::setChampionList(std::vector<std::string> comboBoxContent, bool bIsChampionList)
 {
-	for(int i = 0; i < championList.size(); i++) 
+	//Clear from previous selection
+	m_comboItemSelected = "";
+	ui->comboBox->clear();
+
+	m_bIsChampionList = bIsChampionList;
+
+	//m_championList = championList;
+	for(int i = 0; i < comboBoxContent.size(); i++) 
 	{
 		//Add vector strings to combo box.
-		//myComboBox->addItem(myString);
+		QString qs = comboBoxContent[i].c_str();
+		ui->comboBox->addItem(qs);
 	}
+}
+
+bool UICAddChampionDialog::getbChampionList()
+{
+	return m_bIsChampionList;
+}
+
+std::string UICAddChampionDialog::getComboContent()
+{
+	std::string str = m_comboItemSelected;
+	return str;
+
 }
 
 void UICAddChampionDialog::on_btn_cancel_clicked()
@@ -34,6 +55,10 @@ void UICAddChampionDialog::on_btn_cancel_clicked()
 
 void UICAddChampionDialog::on_btn_accept_clicked()
 {
+	QString currentText = ui->comboBox->currentText();
+	m_comboItemSelected = currentText.toUtf8();
     close();
-    emit newChampionString();
+    emit newComboContent();
+
+
 }

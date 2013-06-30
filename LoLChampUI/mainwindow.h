@@ -3,11 +3,12 @@
 
 #include <QMainWindow>
 #include <QStringListModel>
+
 #include "LCMChampion.h"
 #include "LCMCategory.h"
-#include "addcategorydialog.h"
 #include "UICAddChampionDialog.h"
-#include "ui_UICAddChampionDialog.h"
+#include "UICAddCategoryDialog.h"
+#include "asasmlibrary.h"
 
 namespace Ui {
 class MainWindow;
@@ -18,19 +19,21 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 //public slots:
-//	void openNewCategoryWindow();
-//	void openNewChampionWindow();
+	void openNewCategoryWindow();
+	void openNewChampionWindow();
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    void UpdatePrimaryList_Champion(void);
-	void UpdatePrimaryList_Category(void);
+	void updatePrimaryList(bool bPrimaryChampionList);
+	void updateSecondaryList();
 	void UpdateSecondaryList_Champion(void);
-    void pullChampionNames(QStringList &l_championNames);
-	void pullCategoryNames(QStringList &l_categoryNames);
+    QStringList pullChampionNames();
+	QStringList pullCategoryNames();
+	void setChampionList(std::vector<std::string> championList);
+	void setCategoryList(std::vector<std::string> categoryList);
 	void setChampionInventory(std::vector<LCMChampion> &championInventory);
 	void setCategoryInventory(std::vector<LCMCategory> &categoryInventory);
-
+	void setAsasmLibrary(asasmlibrary *ChampionGeneratedData);
     ~MainWindow();
     
 private slots:
@@ -43,18 +46,21 @@ private slots:
 	void on_rad_byCategory_selected(bool checked);
 	void on_rad_byChampion_selected(bool checked);
 	void on_categoryUpdate();
-	void on_championUpdate();
+	void on_comboUpdate();
 
     void on_list_primary_changed(QModelIndex index);
 
 private:
     Ui::MainWindow *ui;
-	addCategoryDialog *newCategoryDialog;
-	UICAddChampionDialog *newChampionDialog;
+	UICAddCategoryDialog *newPrimaryDialog;
+	UICAddChampionDialog *newSecondaryDialog;
     QStringListModel* m_model;
 	QStringListModel* m_smodel;
+	asasmlibrary* m_championGeneratedData;
     std::vector<LCMChampion> m_championInventory;
 	std::vector<LCMCategory> m_categoryInventory;
+	std::vector<std::string> m_championList;
+	std::vector<std::string> m_categoryList;
 
 	void listByChampion(void);
 	void listByCategory(void);

@@ -1,4 +1,5 @@
 #include "LCMCategory.h"
+#include <algorithm>
 
 //Function Definitions
 /***************************************************************************/
@@ -29,16 +30,13 @@ void LCMCategory::addChampion(std::string newChampion) {
 
 	for(int i = 0; i < m_championList.size(); i++) {
 		if(m_championList[i] == newChampion) {
-			throw "Champion already in list!";
-		}
-
-		if(m_championList[i] > newChampion) {
-			index = i;
+			return;
 		}
 	}
 	
-	//Insert champion alphabetically into vector
-	m_championList.insert(m_championList.begin()+index, newChampion);
+	m_championList.push_back(newChampion);
+	std::sort(m_championList.begin(), m_championList.end());
+
 }
 
 /***************************************************************************/

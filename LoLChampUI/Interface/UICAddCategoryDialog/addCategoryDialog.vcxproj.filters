@@ -47,32 +47,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="addcategorydialog.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_UICAddCategoryDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_UICAddCategoryDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="UICAddCategoryDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_addcategorydialog.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_addcategorydialog.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="addcategorydialog.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="addcategorydialog.ui">
+    <CustomBuild Include="UICAddCategoryDialog.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GeneratedFiles\ui_addcategorydialog.h">
+    <CustomBuild Include="UICAddCategoryDialog.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GeneratedFiles\ui_UICAddCategoryDialog.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
+    </CustomBuild>
   </ItemGroup>
 </Project>

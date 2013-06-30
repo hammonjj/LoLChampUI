@@ -89,25 +89,28 @@ void asasmlibrary::changeSearchTags(vector<string> championSearchTags, vector<st
 
 /***************************************************************************/
 void asasmlibrary::readSearchTags(const string champName, vector<string> &searchTags) {
-		string asamSearchString = "      pushstring          \"" + champName + "\"";
-		string beginSTag =		  "      pushstring          \"";
-		string endSTag = "\"";
-		string endTags = "newarray";
+	string asamSearchString = "      pushstring          \"" + champName + "\"";
+	string beginSTag =		  "      pushstring          \"";
+	string endSTag = "\"";
+	string endTags = "newarray";
 
-		int endSTagLength = beginSTag.length();
-		int beginSTagLength = endSTag.length();
+	int endSTagLength = beginSTag.length();
 
-		int lineCounter = 10; //Line displacement between champion name and search tags.
-		int index = -1;
+	int lineCounter = 10; //Line displacement between champion name and search tags.
+	int index = -1;
 
-		for(int i = 0; i < m_asasmFile.size()-1; i++) { 
-		if(m_asasmFile[i] == asamSearchString) {
+	for(int i = 0; i < m_asasmFile.size()-1; i++) 
+	{ 
+		if(m_asasmFile[i] == asamSearchString) 
+		{
 			
 			//return current search tags.
-			while(true) { 
+			while(true) 
+			{ 
 				index = m_asasmFile[i+lineCounter].find(endTags);
 				
-				if(index != -1) {
+				if(index != -1) 
+				{
 					break;
 				}
 
@@ -117,7 +120,8 @@ void asasmlibrary::readSearchTags(const string champName, vector<string> &search
 				temp.erase(temp.end() - 1, temp.end());
 
 				searchTags.push_back(temp);
-				lineCounter++;
+				m_asasmFile.erase(m_asasmFile.begin()+i+lineCounter, m_asasmFile.begin()+i+lineCounter+1);
+				//lineCounter++;
 			}
 
 		}
@@ -155,4 +159,9 @@ void asasmlibrary::readCategoryList(vector<string> &categoryList) {
 			}
 
 	}
+}
+
+void asasmlibrary::getAsasmFile(std::vector<std::string> &asamFile)
+{
+	asamFile = m_asasmFile;
 }

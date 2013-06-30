@@ -20,6 +20,7 @@ class LCMChampion {
 		LCMChampion(std::string champName, std::vector<std::string> &searchTags);
 		void setSearchTags(std::vector<std::string> searchTags);
 		void setChampName(std::string champName);
+		void addSearchTag(std::string searchTag);
 		std::string getChampName(void);
 		std::vector<std::string> getSearchTags(void);
 };

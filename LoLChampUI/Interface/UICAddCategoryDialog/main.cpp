@@ -1,10 +1,10 @@
-#include "addcategorydialog.h"
+#include "UICAddCategoryDialog.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    addCategoryDialog w;
+    UICAddCategoryDialog w;
     w.show();
     
     return a.exec();

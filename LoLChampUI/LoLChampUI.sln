@@ -2,10 +2,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LoLChampUI", "LoLChampUI.vcxproj", "{4B13FF38-E96B-3079-B46E-C6F7D678788C}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "addCategoryDialog", "Interface\addCategoryDialog.vcxproj", "{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9C65A41D-6051-3EFB-A362-B778CF466469} = {9C65A41D-6051-3EFB-A362-B778CF466469}
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D} = {1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UICAddChampionDialog", "Interface\UICAddChampionDialog\UICAddChampionDialog\UICAddChampionDialog.vcxproj", "{9C65A41D-6051-3EFB-A362-B778CF466469}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UICAddCategoryDialog", "Interface\UICAddCategoryDialog\addCategoryDialog.vcxproj", "{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,18 +33,6 @@ Global
 		{4B13FF38-E96B-3079-B46E-C6F7D678788C}.Release|Win32.Build.0 = Release|Win32
 		{4B13FF38-E96B-3079-B46E-C6F7D678788C}.Release|x64.ActiveCfg = Release|x64
 		{4B13FF38-E96B-3079-B46E-C6F7D678788C}.Release|x64.Build.0 = Release|x64
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|Win32.Build.0 = Debug|Win32
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|x64.ActiveCfg = Debug|x64
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|x64.Build.0 = Debug|x64
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|Win32.ActiveCfg = Release|Win32
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|Win32.Build.0 = Release|Win32
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|x64.ActiveCfg = Release|x64
-		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|x64.Build.0 = Release|x64
 		{9C65A41D-6051-3EFB-A362-B778CF466469}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{9C65A41D-6051-3EFB-A362-B778CF466469}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{9C65A41D-6051-3EFB-A362-B778CF466469}.Debug|Win32.ActiveCfg = Debug|Win32
@@ -53,6 +45,18 @@ Global
 		{9C65A41D-6051-3EFB-A362-B778CF466469}.Release|Win32.Build.0 = Release|Win32
 		{9C65A41D-6051-3EFB-A362-B778CF466469}.Release|x64.ActiveCfg = Release|x64
 		{9C65A41D-6051-3EFB-A362-B778CF466469}.Release|x64.Build.0 = Release|x64
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|Win32.Build.0 = Debug|Win32
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|x64.ActiveCfg = Debug|x64
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Debug|x64.Build.0 = Debug|x64
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|Win32.ActiveCfg = Release|Win32
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|Win32.Build.0 = Release|Win32
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|x64.ActiveCfg = Release|x64
+		{1FCCBB36-6CF8-3F66-89E3-18E8DD57515D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

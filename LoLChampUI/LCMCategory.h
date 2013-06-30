@@ -17,8 +17,8 @@ class LCMCategory {
 		std::string m_category;
 
 	public:
-		LCMCategory(std::string category, std::vector<std::string> championList);
-		LCMCategory(std::string category);
+		explicit LCMCategory(std::string category, std::vector<std::string> championList);
+		explicit LCMCategory(std::string category);
 		void setChampionList(std::vector<std::string> championList);
 		void setCategory(std::string category);
 		void addChampion(std::string newChampion);

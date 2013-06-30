@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>addCategoryDialog</class>
- <widget class="QDialog" name="addCategoryDialog">
+ <class>UICAddCategoryDialog</class>
+ <widget class="QDialog" name="UICAddCategoryDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -25,7 +25,7 @@
   <property name="windowTitle">
    <string>Add New Category</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -40,7 +40,7 @@
       <property name="title">
        <string/>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>

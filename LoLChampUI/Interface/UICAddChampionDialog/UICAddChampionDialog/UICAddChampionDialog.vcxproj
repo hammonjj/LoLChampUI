@@ -52,7 +52,7 @@
     <OutputDirectory>debug\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>NotSet</CharacterSet>
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <IntermediateDirectory>debug\</IntermediateDirectory>
     <PrimaryOutput>UICAddChampionDialog</PrimaryOutput>
   </PropertyGroup>
@@ -91,6 +91,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IntDir>$(Platform)\$(Configuration)</IntDir>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IntDir>$(Platform)\$(Configuration)</IntDir>
@@ -218,7 +219,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\admin\Documents\GitHub\LoLChampUI\LoLChampUI\Interface\UICAddChampionDialog\build-UICAddChampionDialog-Desktop_Qt_5_0_2_MSVC2012_64bit-Debug;..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include;..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtWidgets;..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtGui;..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtCore;debug;.;..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\mkspecs\win32-msvc2012;.\GeneratedFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\admin\Documents\GitHub\LoLChampUI\LoLChampUI;C:\Users\admin\Documents\GitHub\LoLChampUI\LoLChampUI\Interface\UICAddChampionDialog\build-UICAddChampionDialog-Desktop_Qt_5_0_2_MSVC2012_64bit-Debug;..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include;..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtWidgets;..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtGui;..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtCore;debug;.;..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\mkspecs\win32-msvc2012;.\GeneratedFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -242,7 +243,7 @@
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
-      <OutputFile>$(OutDir)\UICAddChampionDialog.exe</OutputFile>
+      <OutputFile>$(OutDir)\UICAddChampionDialog.dll</OutputFile>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -267,7 +268,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="UICAddChampionDialog.cpp" />
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="UICAddChampionDialog.h">
@@ -276,7 +276,7 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing UICAddChampionDialog.h...</Message>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing UICAddChampionDialog.h...</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DQT_DLL "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include" "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtWidgets" "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtGui" "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\mkspecs\win32-msvc2012" "-I.\GeneratedFiles"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DQT_DLL  "-IC:\Users\admin\Documents\GitHub\LoLChampUI\LoLChampUI\Interface\UICAddChampionDialog\build-UICAddChampionDialog-Desktop_Qt_5_0_2_MSVC2012_64bit-Debug" "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include" "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtWidgets" "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtGui" "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\mkspecs\win32-msvc2012" "-I.\GeneratedFiles"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DQT_DLL  "-IC:\Users\admin\Documents\GitHub\LoLChampUI\LoLChampUI" "-IC:\Users\admin\Documents\GitHub\LoLChampUI\LoLChampUI\Interface\UICAddChampionDialog\build-UICAddChampionDialog-Desktop_Qt_5_0_2_MSVC2012_64bit-Debug" "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include" "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtWidgets" "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtGui" "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\..\..\..\Qt\Qt5.0.2\5.0.2\msvc2012_64\mkspecs\win32-msvc2012" "-I.\GeneratedFiles"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing UICAddChampionDialog.h...</Message>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing UICAddChampionDialog.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>

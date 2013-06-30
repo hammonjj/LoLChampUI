@@ -68,33 +68,9 @@
     <ClCompile Include="asasmlibrary.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_addcategorydialog.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_addcategorydialog.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Interface\addcategorydialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Interface\UICAddChampionDialog\UICAddChampionDialog\UICAddChampionDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_UICAddChampionDialog.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_UICAddChampionDialog.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Interface\addcategorydialog.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Interface\UICAddChampionDialog\UICAddChampionDialog\UICAddChampionDialog.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -119,5 +95,8 @@
     <ClInclude Include="toolbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
