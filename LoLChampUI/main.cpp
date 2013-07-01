@@ -17,7 +17,7 @@ using std::vector;
 using std::ifstream;
 using std::ofstream;
 
-string L_CHAMP_GENERATED_DATA_PATH = "Resources\\ASAM\\0.0.1.28\\AirGeneratedContent-0\\com\\riotgames\\platform\\gameclient\\domain\\";
+string L_CHAMP_GENERATED_DATA_PATH = "asasm\\0.0.1.30\\AirGeneratedContent-0\\com\\riotgames\\platform\\gameclient\\domain\\";
 string L_CHAMP_GENERATED_DATA_ASAM = "ChampionGeneratedData.class.asasm";
 
 asasmlibrary* ChampionGeneratedData;
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
 	w.setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-	w.show();
+
 
     vector<string> championList;
     vector<string> championSearchTags;
@@ -55,7 +55,8 @@ int main(int argc, char *argv[])
 	w.setChampionList(championList);
 	w.setCategoryList(categoryList);
 	w.setAsasmLibrary(ChampionGeneratedData);
-    delete ChampionGeneratedData;
+	w.show();
+    //delete ChampionGeneratedData;
 
     return a.exec();
 }

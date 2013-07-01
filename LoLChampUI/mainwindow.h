@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QStringListModel>
+#include <ShObjIdl.h>
 
 #include "LCMChampion.h"
 #include "LCMCategory.h"

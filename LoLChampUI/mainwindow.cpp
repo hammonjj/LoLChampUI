@@ -3,8 +3,10 @@
 #include <QString>
 #include <QMainWindow>
 #include <QStringList>
+#include <QMessageBox>
 #include <string>
 #include <vector>
+#include <ShObjIdl.h>
 
 #include "LCMChampion.h"
 
@@ -458,21 +460,35 @@ void MainWindow::on_removeSecondary_clicked()
 	updateSecondaryList();
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_restore_clicked() 
 {
 	//Restore original riot .swf file
-	system("copy /y \"C:\\Program Files\\LoL Champ Manager\\Resources\\AirGeneratedContent.swf\" \"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf\"");
-	system("copy /y \"C:\\Program Files\\LoL Champ Manager\\Resources\\resources-en_US.swf\" \"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\Game\\resources-en_US.swf\"");
-	//this->close();
-	//delete ui;
+	int successAir = CopyFile(L"C:\\Program Files\\LoL Champ Manager\\res\\AirGeneratedContent.swf", 
+		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf", false);
+	
+	int successResources = CopyFile(L"C:\\Program Files\\LoL Champ Manager\\res\\resources-en_US.swf", 
+		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf", false);
+	
+	QMessageBox messageBox;
+
+	std::string infoMsg = "AirGeneratedContent: " + std::to_string(successAir) + "\nresources-en_US " + std::to_string(successResources);
+
+	//if(successAir && successResources)
+	//{
+	//	infoMsg = "Files restored successfully";
+	//}
+	messageBox.information(0,"LoL Champ Manager", infoMsg.c_str());
+	messageBox.setFixedSize(500,200);	
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_apply_clicked() 
 {
-	//Make changes to asasm vector and assemble file
-	//Insert search tags into champion buckets, then change array size to match the number of search tags
+	m_championGeneratedData->insertSearchTags(m_championInventory);
+	m_championGeneratedData->insertCategories(m_categoryInventory);
+	m_championGeneratedData->writeFile("asasm\\0.0.1.30\\AirGeneratedContent-0\\com\\riotgames\\platform\\gameclient\\domain\\ChampionGeneratedData.class.asasm");
+	m_championGeneratedData->assembleFile();
 }
 
 /////////////////////////////////////////////////////////////////////////////
