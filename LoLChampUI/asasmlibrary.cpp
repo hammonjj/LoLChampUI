@@ -115,7 +115,7 @@ void asasmlibrary::readSearchTags(const string champName, vector<string> &search
 				temp.erase(temp.end() - 1, temp.end());
 
 				searchTags.push_back(temp);
-				m_asasmFile.erase(m_asasmFile.begin()+i+lineCounter, m_asasmFile.begin()+i+lineCounter+1);
+				m_asasmFile.erase(m_asasmFile.begin()+i+lineCounter);
 			}
 		}
 	}
@@ -124,36 +124,45 @@ void asasmlibrary::readSearchTags(const string champName, vector<string> &search
 //Read Categories
 void asasmlibrary::readCategoryList(vector<string> &categoryList) {
 	string categoryListBegin = "      findproperty        QName(PackageNamespace(\"\"), \"championSearchTags\")";
-	string categoryListEnd = "      newarray";
+	string categoryListEnd = "      initproperty        QName(PackageNamespace(\"\"), \"championSearchTags\")";
 	string categoryPrefix = "      pushstring          \"";
-	int begin;
-	int index;
+	bool complete = false;
 
 	int prefixLength = categoryPrefix.size();
 	
-	for(int i = 6000;i < m_asasmFile.size(); i++) {
-			begin = m_asasmFile[i].find(categoryListBegin);
-
-			if(begin != -1) {
-				for(int j = i+1; j < m_asasmFile.size(); j++) {
-					index = m_asasmFile[j].find(categoryListEnd);
-
-					if(index != -1) {
-						m_asasmFile.erase(m_asasmFile.begin()+j, m_asasmFile.begin()+j+1);
-						break;
-					}
-
-					//Remove excess characters around category string
-					string temp = m_asasmFile[j];
-					temp.erase(0, prefixLength);
-					temp.erase(temp.end() - 1, temp.end());
-
-					categoryList.push_back(temp);
-					//Deleting two entries instead of one or none at all
-					m_asasmFile.erase(m_asasmFile.begin()+j, m_asasmFile.begin()+j);
+	for(int i = 6000;i < m_asasmFile.size(); i++) 
+	{
+		if(m_asasmFile[i] == categoryListBegin)
+		{
+			for(int j = i+1; j < m_asasmFile.size(); ) 
+			{
+				if(categoryListEnd == m_asasmFile[j+1])
+				{
+					m_asasmFile.erase(m_asasmFile.begin()+j);
+					complete = true;
+					break;
 				}
 
+				if(m_asasmFile[j] == "end ; class")
+				{
+					_ASSERT("End of file reached without finding end of categories!");
+					break;
+				}
+
+				//Remove excess characters around category string
+				string temp = m_asasmFile[j];
+				temp.erase(0, prefixLength);
+				temp.erase(temp.end() - 1, temp.end());
+
+				categoryList.push_back(temp);
+				m_asasmFile.erase(m_asasmFile.begin()+j);
 			}
+		}
+
+		if(complete == true)
+		{
+			break;
+		}
 	}
 }
 
@@ -199,11 +208,12 @@ void asasmlibrary::insertCategories(std::vector<LCMCategory> &categoryInventory)
 	{
 		if(m_asasmFile[i] == categoryListBegin)
 		{
-			m_asasmFile[i] = categoryListEnd + std::to_string(categoryInventory.size());
+			std::string sizeStr = categoryListEnd + std::to_string(categoryInventory.size());
+			m_asasmFile.insert(m_asasmFile.begin()+i+1, sizeStr);
 			for(int j = 0; j < categoryInventory.size(); j++)
 			{
 				std::string str = categoryPrefix + categoryInventory[j].getCategory() + endCatTag;
-				m_asasmFile.insert(m_asasmFile.begin()+i, str);
+				m_asasmFile.insert(m_asasmFile.begin()+i+1, str);		
 			}
 
 		}

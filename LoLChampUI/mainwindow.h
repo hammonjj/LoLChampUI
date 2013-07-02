@@ -20,8 +20,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 //public slots:
-	void openNewCategoryWindow();
-	void openNewChampionWindow();
+//	void openNewCategoryWindow();
+//	void openNewChampionWindow();
 
 public:
     explicit MainWindow(QWidget *parent = 0);

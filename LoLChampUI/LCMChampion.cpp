@@ -26,8 +26,6 @@ void LCMChampion::setChampName(std::string champName)
 /***************************************************************************/
 void LCMChampion::addSearchTag(std::string searchTag)
 {
-	int index;
-
 	for(int i = 0; i < m_searchTags.size(); i++) {
 		if(m_searchTags[i] == searchTag) {
 			return;

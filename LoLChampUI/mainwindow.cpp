@@ -237,8 +237,6 @@ void MainWindow::on_comboUpdate()
 /////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_addPrimary_clicked()
 {
-	//connect(newPrimaryDialog,SIGNAL(newCategoryString()),this,SLOT(on_categoryUpdate())); 
-
 	if(ui->rad_byCategory->isChecked()) 
 	{
 		newPrimaryDialog->show();
