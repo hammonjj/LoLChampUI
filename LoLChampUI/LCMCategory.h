@@ -27,7 +27,4 @@ class LCMCategory {
 		std::vector<std::string> getChampionList(void);
 };
 
-
-
-
 #endif

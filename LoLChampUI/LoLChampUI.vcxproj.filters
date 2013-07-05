@@ -92,8 +92,8 @@
     <ClInclude Include="asasmlibrary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="toolbox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\..\..\Program Files\LoL Champ Manager\resource.rc" />
   </ItemGroup>
 </Project>

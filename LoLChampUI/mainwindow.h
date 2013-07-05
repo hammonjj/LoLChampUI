@@ -19,10 +19,6 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-//public slots:
-//	void openNewCategoryWindow();
-//	void openNewChampionWindow();
-
 public:
     explicit MainWindow(QWidget *parent = 0);
 	void updatePrimaryList(bool bPrimaryChampionList);
@@ -48,7 +44,6 @@ private slots:
 	void on_rad_byChampion_selected(bool checked);
 	void on_categoryUpdate();
 	void on_comboUpdate();
-
     void on_list_primary_changed(QModelIndex index);
 
 private:

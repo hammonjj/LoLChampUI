@@ -47,8 +47,6 @@ void LCMCategory::removeChampion(std::string oldChampion) {
 			return;
 		}
 	}
-
-	//If loops completes, champion not in list, but UI won't allow that.
 }
 /***************************************************************************/
 std::string LCMCategory::getCategory(void) {

@@ -25,5 +25,4 @@ class LCMChampion {
 		std::vector<std::string> getSearchTags(void);
 };
 
-
 #endif

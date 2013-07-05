@@ -12,10 +12,6 @@ using std::string;
 using std::ifstream;
 using std::ofstream;
 
-const string CHAMP_GENERATED_DATA_REWRITE = "Test Space\\AirGeneratedContent-0\\com\\riotgames\\platform\\gameclient\\domain";
-const string CHAMP_GENERATED_DATA_PATH = "Resources\\ASAM\\0.0.1.28\\AirGeneratedContent-0\\com\\riotgames\\platform\\gameclient\\domain";
-const string CHAMP_GENERATED_DATA_ASAM = "ChampionGeneratedData.class.asasm";
-
 //Function Definitions
 /***************************************************************************/
 asasmlibrary::asasmlibrary(string fileName) {
@@ -24,10 +20,6 @@ asasmlibrary::asasmlibrary(string fileName) {
 
 		readFile(fileName);
 }
-
-//asasmlibrary::~asasmlibrary() {
-//
-//}
 
 void asasmlibrary::readFile(string fileName) {
 	ifstream asamFile;
@@ -46,7 +38,6 @@ void asasmlibrary::readFile(string fileName) {
 
 /***************************************************************************/
 void asasmlibrary::writeFile(string fileName, vector<string> &fileLines) {
-	//string path = "Test Space\\" + fileName;
 	ofstream outputAsam;
 	outputAsam.open(fileName);
 
@@ -60,7 +51,6 @@ void asasmlibrary::writeFile(string fileName, vector<string> &fileLines) {
 }
 
 void asasmlibrary::writeFile(string fileName) {
-	//string path = "tmp\\" + fileName;
 	ofstream outputAsam;
 	outputAsam.open(fileName);
 
@@ -78,8 +68,8 @@ void asasmlibrary::assembleFile() {
 	system("assembleAirGeneratedContent.bat");
 
 	//Commands are happening too fast?  Batch file works for now.
-	//system("\"C:\\Users\\admin\\Documents\\GitHub\\LoLChampUI\\LoLChampUI\\Resources\\RABCDAsm_v1.13\\rabcasm.exe\" \"C:\\Users\\admin\\Documents\\GitHub\\LoLChampUI\\LoLChampUI\\asasm\\0.0.1.30\\AirGeneratedContent-0\\AirGeneratedContent-0.main.asasm\"");
-	//system("\"C:\\Users\\admin\\Documents\\GitHub\\LoLChampUI\\LoLChampUI\\Resources\\RABCDAsm_v1.13\\abcreplace.exe\" \"C:\\Users\\admin\\Documents\\GitHub\\LoLChampUI\\LoLChampUI\\asasm\\0.0.1.30\\AirGeneratedContent.swf\" 0 \"C:\\Users\\admin\\Documents\\GitHub\\LoLChampUI\\LoLChampUI\\asasm\\0.0.1.30\\AirGeneratedContent-0\\AirGeneratedContent-0.main.abc\"");
+	//system("rabcdasm\\rabcasm.exe ..\\asasm\\0.0.1.30\\AirGeneratedContent-0\\AirGeneratedContent-0.main.asasm");
+	//system("rabcdasm\\abcreplace.exe ..\\asasm\\0.0.1.30\\AirGeneratedContent.swf 0 ..\\asasm\\0.0.1.30\\AirGeneratedContent-0\\AirGeneratedContent-0.main.abc");
 }
 
 /***************************************************************************/

@@ -48,6 +48,9 @@ public:
         MainWindow->resize(262, 561);
         MainWindow->setMinimumSize(QSize(262, 561));
         MainWindow->setMaximumSize(QSize(262, 561));
+        QIcon icon;
+        icon.addFile(QStringLiteral("x64/Release/personal.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
         MainWindow->setTabShape(QTabWidget::Rounded);
         MainWindow->setUnifiedTitleAndToolBarOnMac(false);
         centralWidget = new QWidget(MainWindow);

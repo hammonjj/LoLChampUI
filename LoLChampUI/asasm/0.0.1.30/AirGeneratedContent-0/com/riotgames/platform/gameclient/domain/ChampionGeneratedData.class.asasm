@@ -665,9 +665,10 @@ class
       pushstring          "Blitzcrank_Overdrive.dds"
       pushstring          "Blitzcrank_PowerFist.dds"
       pushstring          "Blitzcrank_StaticField.dds"
-      pushstring          "melee"
+      pushstring          "bans"
       pushstring          "fighter"
-      newarray            2
+      pushstring          "melee"
+      newarray            3
       pushstring          "53001"
       pushstring          "skinId"
       pushint             53001
@@ -901,10 +902,11 @@ class
       pushstring          "GreenTerror_FeralScream.dds"
       pushstring          "GreenTerror_ChitinousExoplates.dds"
       pushstring          "GreenTerror_Feast.dds"
-      pushstring          "melee"
       pushstring          "fighter"
+      pushstring          "jungle"
       pushstring          "mage"
-      newarray            3
+      pushstring          "melee"
+      newarray            4
       pushstring          "31004"
       pushstring          "skinId"
       pushshort           31004
@@ -1845,9 +1847,10 @@ class
       pushstring          "Hecarim_DevastingCharge.dds"
       pushstring          "Hecarim_OnslaughtofShadows.dds"
       pushstring          "melee"
-      pushstring          "fighter"
       pushstring          "jungler"
-      newarray            3
+      pushstring          "jungle"
+      pushstring          "fighter"
+      newarray            4
       pushstring          "120002"
       pushstring          "skinId"
       pushint             120002
@@ -2188,10 +2191,11 @@ class
       pushstring          "Jayce_StaticField.dds"
       pushstring          "Jayce_ThunderingBlow.dds"
       pushstring          "Jayce_TransformCannon.dds"
-      pushstring          "melee"
       pushstring          "fighter"
+      pushstring          "melee"
       pushstring          "ranged"
-      newarray            3
+      pushstring          "top"
+      newarray            4
       pushstring          "126001"
       pushstring          "skinId"
       pushint             126001
@@ -2915,9 +2919,10 @@ class
       pushstring          "LuxLightStrikeKugel.dds"
       pushstring          "LuxFinaleFunkeln.dds"
       pushstring          "mage"
+      pushstring          "mid"
       pushstring          "ranged"
       pushstring          "support"
-      newarray            3
+      newarray            4
       pushstring          "99002"
       pushstring          "skinId"
       pushint             99002
@@ -2976,9 +2981,11 @@ class
       pushstring          "Malphite_BrutalStrikes.dds"
       pushstring          "Malphite_GroundSlam.dds"
       pushstring          "Malphite_UnstoppableForce.dds"
-      pushstring          "melee"
+      pushstring          "bans"
       pushstring          "fighter"
-      newarray            2
+      pushstring          "jungle"
+      pushstring          "melee"
+      newarray            4
       pushstring          "54002"
       pushstring          "skinId"
       pushint             54002
@@ -3521,9 +3528,10 @@ class
       pushstring          "Nautilus_Wrath.dds"
       pushstring          "Nautilus_RippleEffect.dds"
       pushstring          "Nautilus_GrandLine.dds"
+      pushstring          "jungle"
       pushstring          "melee"
       pushstring          "tank"
-      newarray            2
+      newarray            3
       pushstring          "111003"
       pushstring          "skinId"
       pushint             111003
@@ -3638,8 +3646,9 @@ class
       pushstring          "Nocturne_UnspeakableHorror.dds"
       pushstring          "Nocturne_Paranoia.dds"
       pushstring          "melee"
+      pushstring          "jungle"
       pushstring          "assassin"
-      newarray            2
+      newarray            3
       pushstring          "56004"
       pushstring          "skinId"
       pushint             56004
@@ -3698,11 +3707,12 @@ class
       pushstring          "Yeti_YetiSmash.dds"
       pushstring          "Yeti_IceBlast.dds"
       pushstring          "Yeti_Shatter.dds"
-      pushstring          "melee"
-      pushstring          "fighter"
       pushstring          "recommended"
+      pushstring          "melee"
       pushstring          "jungler"
-      newarray            4
+      pushstring          "jungle"
+      pushstring          "fighter"
+      newarray            5
       pushstring          "20005"
       pushstring          "skinId"
       pushshort           20005
@@ -4035,10 +4045,11 @@ class
       pushstring          "Armordillo_Shellbash.dds"
       pushstring          "Armordillo_ScaledPlating.dds"
       pushstring          "Armordillo_RecklessCharge.dds"
-      pushstring          "melee"
       pushstring          "tank"
       pushstring          "recommended"
-      newarray            3
+      pushstring          "melee"
+      pushstring          "jungle"
+      newarray            4
       pushstring          "33003"
       pushstring          "skinId"
       pushint             33003
@@ -4289,9 +4300,10 @@ class
       pushstring          "Ryze_LightningFlux.dds"
       pushstring          "Ryze_DesperatePower.dds"
       pushstring          "mage"
-      pushstring          "recommended"
+      pushstring          "mid"
       pushstring          "ranged"
-      newarray            3
+      pushstring          "recommended"
+      newarray            4
       pushstring          "13006"
       pushstring          "skinId"
       pushshort           13006
@@ -4374,10 +4386,11 @@ class
       pushstring          "Sejuani_W.dds"
       pushstring          "Sejuani_E_dark.dds"
       pushstring          "Sejuani_R.dds"
-      pushstring          "melee"
       pushstring          "tank"
+      pushstring          "melee"
       pushstring          "jungler"
-      newarray            3
+      pushstring          "jungle"
+      newarray            4
       pushstring          "113003"
       pushstring          "skinId"
       pushint             113003
@@ -4420,10 +4433,11 @@ class
       pushstring          "Jester_DeathWard.dds"
       pushstring          "Jester_IncrediblyPrecise.dds"
       pushstring          "Jester_HallucinogenBomb.dds"
+      pushstring          "assassin"
+      pushstring          "jungle"
       pushstring          "melee"
       pushstring          "stealth"
-      pushstring          "assassin"
-      newarray            3
+      newarray            4
       pushstring          "35002"
       pushstring          "skinId"
       pushint             35002
@@ -4613,9 +4627,10 @@ class
       pushstring          "ChemMan_MegaAdhesive.dds"
       pushstring          "ChemicalMan_fling.dds"
       pushstring          "ChemicalMan_ChemicalRage.dds"
-      pushstring          "melee"
+      pushstring          "bans"
       pushstring          "fighter"
-      newarray            2
+      pushstring          "melee"
+      newarray            3
       pushstring          "27002"
       pushstring          "skinId"
       pushshort           27002
@@ -4791,9 +4806,10 @@ class
       pushstring          "SkarnerFracture.dds"
       pushstring          "SkarnerImpale.dds"
       pushstring          "melee"
-      pushstring          "fighter"
       pushstring          "jungler"
-      newarray            3
+      pushstring          "jungle"
+      pushstring          "fighter"
+      newarray            4
       pushstring          "72001"
       pushstring          "skinId"
       pushint             72001
@@ -5280,9 +5296,11 @@ class
       pushstring          "Trundle_W.dds"
       pushstring          "Trundle_E.dds"
       pushstring          "Trundle_R.dds"
-      pushstring          "melee"
       pushstring          "fighter"
-      newarray            2
+      pushstring          "jungle"
+      pushstring          "melee"
+      pushstring          "top"
+      newarray            4
       pushstring          "48003"
       pushstring          "skinId"
       pushint             48003
@@ -5325,9 +5343,10 @@ class
       pushstring          "48thSlave_Pacify.dds"
       pushstring          "DarkChampion_Slash.dds"
       pushstring          "DarkChampion_EndlessRage.dds"
-      pushstring          "melee"
+      pushstring          "bans"
       pushstring          "carry"
-      newarray            2
+      pushstring          "melee"
+      newarray            3
       pushstring          "23001"
       pushstring          "skinId"
       pushshort           23001
@@ -5386,10 +5405,12 @@ class
       pushstring          "CardMaster_FatesGambit.dds"
       pushstring          "Cardmaster_RapidToss.dds"
       pushstring          "Destiny_temp.dds"
-      pushstring          "ranged"
       pushstring          "assassin"
+      pushstring          "bans"
+      pushstring          "mid"
       pushstring          "pusher"
-      newarray            3
+      pushstring          "ranged"
+      newarray            5
       pushstring          "4005"
       pushstring          "skinId"
       pushshort           4005
@@ -5907,11 +5928,12 @@ class
       pushstring          "VolibearW.dds"
       pushstring          "VolibearE.dds"
       pushstring          "VolibearR.dds"
+      pushstring          "fighter"
+      pushstring          "jungle"
+      pushstring          "jungler"
       pushstring          "melee"
       pushstring          "tank"
-      pushstring          "fighter"
-      pushstring          "jungler"
-      newarray            4
+      newarray            5
       pushstring          "106002"
       pushstring          "skinId"
       pushint             106002
@@ -6179,8 +6201,9 @@ class
       pushstring          "ZacE.dds"
       pushstring          "ZacR.dds"
       pushstring          "melee"
+      pushstring          "jungle"
       pushstring          "fighter"
-      newarray            2
+      newarray            3
       pushstring          "154001"
       pushstring          "skinId"
       pushint             154001
@@ -6373,7 +6396,11 @@ class
       pushstring          "support"
       pushstring          "jungler"
       pushstring          "pusher"
-      newarray            12
+      pushstring          "top"
+      pushstring          "mid"
+      pushstring          "jungle"
+      pushstring          "bans"
+      newarray            16
       initproperty        QName(PackageNamespace(""), "championSearchTags")
 
       returnvoid
@@ -6398,4 +6425,8 @@ class
   end ; body
  end ; method
 end ; class
+
+
+
+
 

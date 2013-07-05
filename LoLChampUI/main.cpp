@@ -6,7 +6,6 @@
 #include <fstream>
 #include <iostream>
 
-
 #include "LCMChampion.h"
 #include "LCMCategory.h"
 #include "asasmlibrary.h"
@@ -17,16 +16,13 @@ using std::vector;
 using std::ifstream;
 using std::ofstream;
 
-string L_CHAMP_GENERATED_DATA_PATH = "asasm\\0.0.1.30\\AirGeneratedContent-0\\com\\riotgames\\platform\\gameclient\\domain\\";
-string L_CHAMP_GENERATED_DATA_ASAM = "ChampionGeneratedData.class.asasm";
-
+string CHAMP_GENERATED_DATA_PATH = "asasm\\0.0.1.30\\AirGeneratedContent-0\\com\\riotgames\\platform\\gameclient\\domain\\ChampionGeneratedData.class.asasm";
 asasmlibrary* ChampionGeneratedData;
 
+std::vector<std::string> findLolDirectory();
 void readChampList(vector<string> &champList);
-void printChampInventory(vector<LCMChampion> &championInventory);
 void championHandler(vector<string> &championList, 	vector<string> &championSearchTags, vector<LCMChampion> &championInventory);
 void categoryHandler(vector<string> &categoryList, vector<LCMCategory> &categoryInventory, vector<LCMChampion> &championInventory);
-void printCategoryInventory(vector<string> &categoryInvetory);
 
 int main(int argc, char *argv[])
 {
@@ -34,21 +30,21 @@ int main(int argc, char *argv[])
     MainWindow w;
 	w.setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
 
-
+	vector<string> filePaths;
     vector<string> championList;
     vector<string> championSearchTags;
-	std::vector<std::string> asasmFile;
-    vector<LCMChampion> championInventory;
-
+	vector<string> categoryList;
+	vector<string> asasmFile;
+    
+	vector<LCMChampion> championInventory;
     vector<LCMCategory> categoryInventory;
-    vector<string> categoryList;
+    
+//	filePaths = findLolDirectory();
 
-    ChampionGeneratedData = new asasmlibrary(L_CHAMP_GENERATED_DATA_PATH + L_CHAMP_GENERATED_DATA_ASAM);
+    ChampionGeneratedData = new asasmlibrary(CHAMP_GENERATED_DATA_PATH);
 
     championHandler(championList, championSearchTags, championInventory);
     categoryHandler(categoryList, categoryInventory, championInventory);   
-	
-	//ChampionGeneratedData->getAsasmFile(asasmFile);
  
     w.setChampionInventory(championInventory);
 	w.setCategoryInventory(categoryInventory);
@@ -56,17 +52,36 @@ int main(int argc, char *argv[])
 	w.setCategoryList(categoryList);
 	w.setAsasmLibrary(ChampionGeneratedData);
 	w.show();
-    //delete ChampionGeneratedData;
 
     return a.exec();
 }
 
 //Function Definitions
 /***************************************************************************/
-void championHandler(vector<string> &championList, 	vector<string> &championSearchTags, vector<LCMChampion> &championInventory) {
+std::vector<std::string> findLolDirectory()
+{
+	std::ifstream lolConfig;
+	lolConfig.open("res\\lolpath.cfg");
+	std::string line;
+
+	if(lolConfig.is_open()) {
+		std::vector<std::string> filePaths;
+		
+		while(lolConfig.good()) {
+			getline(lolConfig, line);
+			filePaths.push_back(line);
+		}
+	lolConfig.close();
+	return filePaths;
+	}
+}
+/***************************************************************************/
+void championHandler(vector<string> &championList, 	vector<string> &championSearchTags, vector<LCMChampion> &championInventory) 
+{
     readChampList(championList);
 
-    for(int i = 0; i <= championList.size(); i++) {
+    for(int i = 0; i <= championList.size(); i++) 
+	{
         //Break loop at the end of championList
         if(championList[i] == "END") {
             break;
@@ -109,7 +124,7 @@ void categoryHandler(vector<string> &categoryList, vector<LCMCategory> &category
 /***************************************************************************/
 void readChampList(vector<string> &champList) {
     ifstream chplst_stream;
-    chplst_stream.open("Resources\\chplst.dat");
+    chplst_stream.open("res\\chplst.dat");
 
     if(chplst_stream.is_open()) {
         string line;
@@ -122,23 +137,3 @@ void readChampList(vector<string> &champList) {
     chplst_stream.close();
 }
 
-/***************************************************************************/
-void printChampInventory(vector<LCMChampion> &championInventory) {
-    for(int i = 0; i < championInventory.size(); i++) {
-        cout << championInventory[i].getChampName() << "\n";
-
-        vector<string> tempSearchTags = championInventory[i].getSearchTags();
-
-        for(int j = 0; j < tempSearchTags.size(); j++) {
-            cout << "-> " << tempSearchTags[j] << "\n";
-        }
-
-        cout << "\n\n";
-    }
-}
-
-void printCategoryInventory(vector<string> &categoryInvetory) {
-    for(int i = 0; i < categoryInvetory.size(); i++) {
-        cout << categoryInvetory[i] << "\n";
-    }
-}

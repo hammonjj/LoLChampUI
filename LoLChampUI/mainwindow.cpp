@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "LCMChampion.h"
 #include <QString>
 #include <QMainWindow>
 #include <QStringList>
@@ -8,14 +9,13 @@
 #include <vector>
 #include <ShObjIdl.h>
 
-#include "LCMChampion.h"
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+	MainWindow::setWindowIcon(QIcon("lolchampmgr.ico"));
 
+    ui->setupUi(this);
 	newPrimaryDialog = new UICAddCategoryDialog();
 	newSecondaryDialog = new UICAddChampionDialog();
 
@@ -46,6 +46,7 @@ MainWindow::~MainWindow()
 {
 	delete newSecondaryDialog;
 	delete newPrimaryDialog;
+	delete m_championGeneratedData;
     delete ui;
 }
 
@@ -462,22 +463,25 @@ void MainWindow::on_removeSecondary_clicked()
 void MainWindow::on_restore_clicked() 
 {
 	//Restore original riot .swf file
-	int successAir = CopyFile(L"C:\\Program Files\\LoL Champ Manager\\res\\AirGeneratedContent.swf", 
+	int successAirD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf");
+	int successAir = CopyFile(L"res\\AirGeneratedContent.swf",
 		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf", false);
 	
-	int successResources = CopyFile(L"C:\\Program Files\\LoL Champ Manager\\res\\resources-en_US.swf", 
+	int successResourcesD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf");
+	int successResources = CopyFile(L"res\\resources-en_US.swf",
 		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf", false);
 	
 	QMessageBox messageBox;
+	std:: string infoMsg;
 
-	std::string infoMsg = "AirGeneratedContent: " + std::to_string(successAir) + "\nresources-en_US " + std::to_string(successResources);
+	if(successAir && successResources)
+		infoMsg = "Successfully updated LoL game files.";
 
-	//if(successAir && successResources)
-	//{
-	//	infoMsg = "Files restored successfully";
-	//}
-	messageBox.information(0,"LoL Champ Manager", infoMsg.c_str());
-	messageBox.setFixedSize(500,200);	
+	else
+		infoMsg = "There was a problem copying your game files.";
+
+		messageBox.information(0,"LoL Champ Manager", infoMsg.c_str());
+		messageBox.setFixedSize(500,200);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -487,6 +491,28 @@ void MainWindow::on_apply_clicked()
 	m_championGeneratedData->insertCategories(m_categoryInventory);
 	m_championGeneratedData->writeFile("asasm\\0.0.1.30\\AirGeneratedContent-0\\com\\riotgames\\platform\\gameclient\\domain\\ChampionGeneratedData.class.asasm");
 	m_championGeneratedData->assembleFile();
+
+	//m_resourcesEnUS(m_categoryList);
+
+	int successAirD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf");
+	int successAir = CopyFile(L"asasm\\0.0.1.30\\AirGeneratedContent.swf",
+		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf", false);
+	
+	int successResourcesD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf");
+	int successResources = CopyFile(L"asasm\\0.0.1.30\\resources-en_US.swf",
+		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf", false);
+
+	QMessageBox messageBox;
+	std:: string infoMsg;
+
+	if(successAir && successResources)
+		infoMsg = "Successfully updated LoL game files.";
+
+	else
+		infoMsg = "There was a problem copying your game files.";
+
+		messageBox.information(0,"LoL Champ Manager", infoMsg.c_str());
+		messageBox.setFixedSize(500,200);
 }
 
 /////////////////////////////////////////////////////////////////////////////
