@@ -19,8 +19,10 @@ asasmlibrary::asasmlibrary(string fileName) {
 		asamSuffix = "\"";
 
 		readFile(fileName);
+
 }
 
+/***************************************************************************/
 void asasmlibrary::readFile(string fileName) {
 	ifstream asamFile;
 	asamFile.open(fileName);
@@ -37,6 +39,100 @@ void asasmlibrary::readFile(string fileName) {
 }
 
 /***************************************************************************/
+void asasmlibrary::readFileResources(string fileName) {
+	ifstream asamFile;
+	asamFile.open(fileName);
+
+	std::string str;
+
+	if(asamFile.is_open()) {
+		string line;
+		
+		while(asamFile.good()) {
+			getline(asamFile, line);
+			m_resourcesFile.push_back(line);
+		}
+	}
+
+	else
+		str = "Could not open resources file.";
+
+	asamFile.close();
+	parseResourcesFile();
+}
+
+/***************************************************************************/
+void asasmlibrary::parseResourcesFile()
+{
+	std::string beginSearchTags = "      pushscope";
+	std::string endSearchTags = "      coerce              QName(PackageNamespace(\"\"), \"Object\")";
+	for(int i = 35; i < m_resourcesFile.size(); i++)
+	{
+		if(m_resourcesFile[i] == beginSearchTags)
+		{
+			if(m_resourcesFile[i+2] == endSearchTags)
+			{
+				return;
+			}
+
+			m_resourcesFile.erase(m_resourcesFile.begin()+i+2);
+			i--;
+		}
+	}
+	return;
+}
+
+/***************************************************************************/
+void asasmlibrary::writeResourcesFile(std::vector<std::string> categoryList, std::string fileName)
+{
+	std::string beginSearchTags = "      pushscope";
+	std::string endSearchTags = "      coerce              QName(PackageNamespace(\"\"), \"Object\")";
+
+	std::string pushString = "      pushstring          \"champion_search_tag_";
+	std::string searchTag = "      pushstring          \"";
+	std::string eol = "\"";
+	std::string memoryRegister = "      newobject           ";
+	bool done = false;
+
+	for(int i = 0; m_resourcesFile.size(); i++)
+	{
+		if(m_resourcesFile[i] == beginSearchTags)
+		{
+			std::string tmp = memoryRegister + std::to_string(categoryList.size());
+
+			m_resourcesFile.insert(m_resourcesFile.begin()+i+2, tmp);
+			for(int j = 0; j < categoryList.size(); j++)
+			{
+				std::string tmp = searchTag + categoryList[j] + eol;
+				m_resourcesFile.insert(m_resourcesFile.begin()+i+2, tmp);
+
+				tmp = pushString + categoryList[j] + eol;
+				m_resourcesFile.insert(m_resourcesFile.begin()+i+2, tmp);
+
+				if(j == categoryList.size()-1)
+					done = true;
+			}
+		}
+
+		if(done)
+			break;
+	}
+
+	ofstream outputAsam;
+	outputAsam.open(fileName);
+
+
+	for(int i = 0; i < m_resourcesFile.size(); i++)
+	{
+		outputAsam << m_resourcesFile[i] << '\n';
+	}
+
+	outputAsam.close();
+}
+
+/***************************************************************************/
+
+/***************************************************************************/
 void asasmlibrary::writeFile(string fileName, vector<string> &fileLines) {
 	ofstream outputAsam;
 	outputAsam.open(fileName);
@@ -50,6 +146,7 @@ void asasmlibrary::writeFile(string fileName, vector<string> &fileLines) {
 	outputAsam.close();
 }
 
+/***************************************************************************/
 void asasmlibrary::writeFile(string fileName) {
 	ofstream outputAsam;
 	outputAsam.open(fileName);
@@ -65,8 +162,8 @@ void asasmlibrary::writeFile(string fileName) {
 
 /***************************************************************************/
 void asasmlibrary::assembleFile() {
-	system("assembleAirGeneratedContent.bat");
-
+	system("res\\assembleAir.bat");
+	//system("assembleResources.bat");
 	//Commands are happening too fast?  Batch file works for now.
 	//system("rabcdasm\\rabcasm.exe ..\\asasm\\0.0.1.30\\AirGeneratedContent-0\\AirGeneratedContent-0.main.asasm");
 	//system("rabcdasm\\abcreplace.exe ..\\asasm\\0.0.1.30\\AirGeneratedContent.swf 0 ..\\asasm\\0.0.1.30\\AirGeneratedContent-0\\AirGeneratedContent-0.main.abc");
@@ -111,6 +208,7 @@ void asasmlibrary::readSearchTags(const string champName, vector<string> &search
 	}
 }
 
+/***************************************************************************/
 //Read Categories
 void asasmlibrary::readCategoryList(vector<string> &categoryList) {
 	string categoryListBegin = "      findproperty        QName(PackageNamespace(\"\"), \"championSearchTags\")";
@@ -156,11 +254,13 @@ void asasmlibrary::readCategoryList(vector<string> &categoryList) {
 	}
 }
 
+/***************************************************************************/
 void asasmlibrary::getAsasmFile(std::vector<std::string> &asamFile)
 {
 	asamFile = m_asasmFile;
 }
 
+/***************************************************************************/
 void asasmlibrary::insertSearchTags(std::vector<LCMChampion> &championInventory)
 {
 	int lineCounter = 10; //Line displacement between champion name and search tags.
@@ -187,6 +287,7 @@ void asasmlibrary::insertSearchTags(std::vector<LCMChampion> &championInventory)
 	}
 }
 
+/***************************************************************************/
 void asasmlibrary::insertCategories(std::vector<LCMCategory> &categoryInventory)
 {
 	string categoryListBegin = "      findproperty        QName(PackageNamespace(\"\"), \"championSearchTags\")";
@@ -208,4 +309,10 @@ void asasmlibrary::insertCategories(std::vector<LCMCategory> &categoryInventory)
 
 		}
 	}
+}
+
+/***************************************************************************/
+void writeResourcesFile(std::vector<std::string> m_categoryList)
+{
+
 }

@@ -16,11 +16,15 @@
 class asasmlibrary {
 	private:
 		std::vector<std::string> m_asasmFile;
+		std::vector<std::string> m_resourcesFile;
 		std::string asamPrefix;
 		std::string asamSuffix;
 
 	public:
 		asasmlibrary(std::string fileName);
+		void readFileResources(std::string fileName);
+		void parseResourcesFile();
+		void writeResourcesFile(std::vector<std::string> categoryList, std::string fileName);
 		void readFile(std::string fileName); //!< Reads AMASM file and returns the file as a string vector, where each index is a line of text 
 		void writeFile(std::string fileName, std::vector<std::string> &fileLines); //!< Writes ASASM file from string vector.  Will print each index on a new line.
 		void writeFile(std::string fileName);
@@ -30,6 +34,7 @@ class asasmlibrary {
 		void getAsasmFile(std::vector<std::string> &asamFile);
 		void insertCategories(std::vector<LCMCategory> &categoryInventory);
 		void insertSearchTags(std::vector<LCMChampion> &championInventory);
+		void writeResourcesFile(std::vector<std::string> m_categoryList);
 		~asasmlibrary(){;};
 };
 

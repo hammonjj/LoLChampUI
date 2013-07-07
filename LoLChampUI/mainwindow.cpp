@@ -467,14 +467,14 @@ void MainWindow::on_restore_clicked()
 	int successAir = CopyFile(L"res\\AirGeneratedContent.swf",
 		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf", false);
 	
-	int successResourcesD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf");
-	int successResources = CopyFile(L"res\\resources-en_US.swf",
-		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf", false);
+//	int successResourcesD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf");
+//	int successResources = CopyFile(L"res\\resources-en_US.swf",
+//		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf", false);
 	
 	QMessageBox messageBox;
 	std:: string infoMsg;
 
-	if(successAir && successResources)
+	if(successAir)
 		infoMsg = "Successfully updated LoL game files.";
 
 	else
@@ -490,22 +490,27 @@ void MainWindow::on_apply_clicked()
 	m_championGeneratedData->insertSearchTags(m_championInventory);
 	m_championGeneratedData->insertCategories(m_categoryInventory);
 	m_championGeneratedData->writeFile("asasm\\0.0.1.30\\AirGeneratedContent-0\\com\\riotgames\\platform\\gameclient\\domain\\ChampionGeneratedData.class.asasm");
+	for(int i = 0; i < 5000; i++);
+	m_championGeneratedData->writeResourcesFile(m_categoryList, "asasm\\0.0.1.30\\resources-en_US-1\\en_US$champion_search_tag_resources_properties.class.asasm");
+	for(int i = 0; i < 5000; i++);
 	m_championGeneratedData->assembleFile();
 
-	//m_resourcesEnUS(m_categoryList);
+	for(int i = 0; i < 5000; i++);
 
 	int successAirD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf");
+	for(int i = 0; i < 5000; i++);
 	int successAir = CopyFile(L"asasm\\0.0.1.30\\AirGeneratedContent.swf",
 		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf", false);
 	
-	int successResourcesD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf");
+/*	int successResourcesD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf");
 	int successResources = CopyFile(L"asasm\\0.0.1.30\\resources-en_US.swf",
 		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf", false);
+		*/
 
 	QMessageBox messageBox;
 	std:: string infoMsg;
 
-	if(successAir && successResources)
+	if(successAir)
 		infoMsg = "Successfully updated LoL game files.";
 
 	else
@@ -513,6 +518,7 @@ void MainWindow::on_apply_clicked()
 
 		messageBox.information(0,"LoL Champ Manager", infoMsg.c_str());
 		messageBox.setFixedSize(500,200);
+		
 }
 
 /////////////////////////////////////////////////////////////////////////////

@@ -17,6 +17,7 @@ using std::ifstream;
 using std::ofstream;
 
 string CHAMP_GENERATED_DATA_PATH = "asasm\\0.0.1.30\\AirGeneratedContent-0\\com\\riotgames\\platform\\gameclient\\domain\\ChampionGeneratedData.class.asasm";
+string CHAMP_RESOURCES_DATA_PATH = "asasm\\0.0.1.30\\resources-en_US-1\\en_US$champion_search_tag_resources_properties.class.asasm";
 asasmlibrary* ChampionGeneratedData;
 
 std::vector<std::string> findLolDirectory();
@@ -42,7 +43,7 @@ int main(int argc, char *argv[])
 //	filePaths = findLolDirectory();
 
     ChampionGeneratedData = new asasmlibrary(CHAMP_GENERATED_DATA_PATH);
-
+	ChampionGeneratedData->readFileResources(CHAMP_RESOURCES_DATA_PATH);
     championHandler(championList, championSearchTags, championInventory);
     categoryHandler(categoryList, categoryInventory, championInventory);   
  

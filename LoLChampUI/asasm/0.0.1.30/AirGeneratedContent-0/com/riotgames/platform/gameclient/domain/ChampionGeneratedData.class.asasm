@@ -379,9 +379,10 @@ class
       pushstring          "SadMummy_AuraofDespair.dds"
       pushstring          "SadMummy_Tantrum.dds"
       pushstring          "SadMummy_BandAidThingy.dds"
-      pushstring          "melee"
       pushstring          "tank"
-      newarray            2
+      pushstring          "melee"
+      pushstring          "jungle"
+      newarray            3
       pushstring          "32007"
       pushstring          "skinId"
       pushshort           32007
@@ -2747,8 +2748,9 @@ class
       pushstring          "BlindMonkEOne.dds"
       pushstring          "BlindMonkR.dds"
       pushstring          "melee"
+      pushstring          "jungle"
       pushstring          "assassin"
-      newarray            2
+      newarray            3
       pushstring          "64004"
       pushstring          "skinId"
       pushint             64004
@@ -6425,6 +6427,18 @@ class
   end ; body
  end ; method
 end ; class
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
