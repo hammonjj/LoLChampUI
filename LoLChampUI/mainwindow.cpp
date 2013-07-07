@@ -490,15 +490,10 @@ void MainWindow::on_apply_clicked()
 	m_championGeneratedData->insertSearchTags(m_championInventory);
 	m_championGeneratedData->insertCategories(m_categoryInventory);
 	m_championGeneratedData->writeFile("asasm\\0.0.1.30\\AirGeneratedContent-0\\com\\riotgames\\platform\\gameclient\\domain\\ChampionGeneratedData.class.asasm");
-	for(int i = 0; i < 5000; i++);
 	m_championGeneratedData->writeResourcesFile(m_categoryList, "asasm\\0.0.1.30\\resources-en_US-1\\en_US$champion_search_tag_resources_properties.class.asasm");
-	for(int i = 0; i < 5000; i++);
 	m_championGeneratedData->assembleFile();
 
-	for(int i = 0; i < 5000; i++);
-
 	int successAirD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf");
-	for(int i = 0; i < 5000; i++);
 	int successAir = CopyFile(L"asasm\\0.0.1.30\\AirGeneratedContent.swf",
 		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf", false);
 	
