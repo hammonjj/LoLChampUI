@@ -1,10 +1,11 @@
 LoL Champion Manager
 ==========
 
-Introduction:
+### Introduction:
 Thanks for downloading LoL Champion Manager.  This mod allows you to change the search tag strings that are associated with various champions and change the current ones.  For example, I've created top, mid, and ban categories for easy searching, but I'm sure others will can think of much more creative categories than I have!
 
-Known Issues/To-Do List:
+### Known Issues/To-Do List:
+
 A few caveats, as this is still in late alpha/early beta:
 1) LoL must be installed in the default location (C:\Riot Games)
 
@@ -16,9 +17,9 @@ A few caveats, as this is still in late alpha/early beta:
 
 5) I'm sorry, but I've only had time to release x64 binaries.  I will be getting to a x32 version soon.  Additionally, I will be porting this utility over to OS X as well.
 
-Donations:
+### Donations:
 While this mod is 100% free to download and use, continual updates do require a significant investment and donations make this much easier!  Any donations can be sent via Paypal to james@thegruppetto.com
 
-Closing:
+### Closing:
 Enjoy the mod!  This is something that has always driven me nuts, so I'm excited to bring a solution to the LoL community!  Please direct any issues or improvement requests to champion.manager@pingdynamic.com
 
