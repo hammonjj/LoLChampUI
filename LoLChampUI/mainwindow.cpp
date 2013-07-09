@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 	newPrimaryDialog = new UICAddCategoryDialog();
 	newSecondaryDialog = new UICAddChampionDialog();
+	settingsDialog = new UICSettingsDialog();
 
 	ui->btn_addPrimary->setEnabled(false);
 	ui->btn_removePrimary->setEnabled(false);
@@ -32,7 +33,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->btn_addSecondary,SIGNAL(clicked()),this,SLOT(on_addSecondary_clicked()));  
 	connect(ui->btn_removeSecondary,SIGNAL(clicked()),this,SLOT(on_removeSecondary_clicked()));  
 	connect(ui->btn_apply,SIGNAL(clicked()),this,SLOT(on_apply_clicked()));  
-	connect(ui->btn_restore,SIGNAL(clicked()),this,SLOT(on_restore_clicked()));  
+	connect(ui->btn_restore,SIGNAL(clicked()),this,SLOT(on_restore_clicked())); 
+	connect(ui->fileSettings,SIGNAL(triggered()),this,SLOT(on_settingsClicked()));
+	connect(ui->fileExit,SIGNAL(triggered()),this,SLOT(on_close()));
 
 	connect(ui->rad_byChampion,SIGNAL(toggled(bool)),this,SLOT(on_rad_byChampion_selected(bool)));  
 	connect(ui->rad_byCategory,SIGNAL(toggled(bool)),this,SLOT(on_rad_byCategory_selected(bool)));  
@@ -44,10 +47,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+	delete settingsDialog;
 	delete newSecondaryDialog;
 	delete newPrimaryDialog;
 	delete m_championGeneratedData;
     delete ui;
+}
+
+void MainWindow::on_close()
+{
+	close();
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -62,6 +71,11 @@ void MainWindow::setChampionList(std::vector<std::string> championList)
 	m_championList = championList;
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void MainWindow::on_settingsClicked()
+{
+	settingsDialog->show();
+}
 /////////////////////////////////////////////////////////////////////////////
 void MainWindow::clear_secondaryList(void) 
 {
@@ -616,8 +630,15 @@ void MainWindow::updateSecondaryList()
 	ui->list_secondary->setModel(m_smodel);
 }
 
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::setAsasmLibrary(asasmlibrary *ChampionGeneratedData)
 {
 	m_championGeneratedData = ChampionGeneratedData;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+void MainWindow::getLolDirectory()
+{
+
 }
 /**********************************************************************************************************/

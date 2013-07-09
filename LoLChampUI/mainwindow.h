@@ -9,6 +9,7 @@
 #include "LCMCategory.h"
 #include "UICAddChampionDialog.h"
 #include "UICAddCategoryDialog.h"
+#include "uicsettingsdialog.h"
 #include "asasmlibrary.h"
 
 namespace Ui {
@@ -43,6 +44,8 @@ private slots:
 	void on_rad_byCategory_selected(bool checked);
 	void on_rad_byChampion_selected(bool checked);
 	void on_categoryUpdate();
+	void on_settingsClicked();
+	void on_close();
 	void on_comboUpdate();
     void on_list_primary_changed(QModelIndex index);
 
@@ -50,6 +53,7 @@ private:
     Ui::MainWindow *ui;
 	UICAddCategoryDialog *newPrimaryDialog;
 	UICAddChampionDialog *newSecondaryDialog;
+	UICSettingsDialog * settingsDialog;
     QStringListModel* m_model;
 	QStringListModel* m_smodel;
 	asasmlibrary* m_championGeneratedData;
@@ -57,7 +61,9 @@ private:
 	std::vector<LCMCategory> m_categoryInventory;
 	std::vector<std::string> m_championList;
 	std::vector<std::string> m_categoryList;
+	std::string lolRootDirectory;
 
+	void getLolDirectory();
 	void listByChampion(void);
 	void listByCategory(void);
 	void clear_secondaryList(void);

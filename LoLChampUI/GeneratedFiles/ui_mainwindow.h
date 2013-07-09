@@ -16,6 +16,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
@@ -27,6 +28,10 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *fileSettings;
+    QAction *fileExit;
+    QAction *actionTroubleshooting;
+    QAction *actionAbout_Champion_Manager;
     QWidget *centralWidget;
     QListView *list_primary;
     QListView *list_secondary;
@@ -39,20 +44,30 @@ public:
     QPushButton *btn_apply;
     QPushButton *btn_restore;
     QMenuBar *menuBar;
+    QMenu *menuFile;
+    QMenu *menuHelp;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(262, 561);
-        MainWindow->setMinimumSize(QSize(262, 561));
-        MainWindow->setMaximumSize(QSize(262, 561));
+        MainWindow->resize(262, 580);
+        MainWindow->setMinimumSize(QSize(262, 580));
+        MainWindow->setMaximumSize(QSize(262, 580));
         QIcon icon;
         icon.addFile(QStringLiteral("x64/Release/personal.ico"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
         MainWindow->setTabShape(QTabWidget::Rounded);
         MainWindow->setUnifiedTitleAndToolBarOnMac(false);
+        fileSettings = new QAction(MainWindow);
+        fileSettings->setObjectName(QStringLiteral("fileSettings"));
+        fileExit = new QAction(MainWindow);
+        fileExit->setObjectName(QStringLiteral("fileExit"));
+        actionTroubleshooting = new QAction(MainWindow);
+        actionTroubleshooting->setObjectName(QStringLiteral("actionTroubleshooting"));
+        actionAbout_Champion_Manager = new QAction(MainWindow);
+        actionAbout_Champion_Manager->setObjectName(QStringLiteral("actionAbout_Champion_Manager"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         list_primary = new QListView(centralWidget);
@@ -91,10 +106,22 @@ public:
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 262, 21));
+        menuFile = new QMenu(menuBar);
+        menuFile->setObjectName(QStringLiteral("menuFile"));
+        menuHelp = new QMenu(menuBar);
+        menuHelp->setObjectName(QStringLiteral("menuHelp"));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
+
+        menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuHelp->menuAction());
+        menuFile->addAction(fileSettings);
+        menuFile->addSeparator();
+        menuFile->addAction(fileExit);
+        menuHelp->addAction(actionTroubleshooting);
+        menuHelp->addAction(actionAbout_Champion_Manager);
 
         retranslateUi(MainWindow);
 
@@ -104,6 +131,10 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "LOL Champ Manager", 0));
+        fileSettings->setText(QApplication::translate("MainWindow", "Settings", 0));
+        fileExit->setText(QApplication::translate("MainWindow", "Exit", 0));
+        actionTroubleshooting->setText(QApplication::translate("MainWindow", "Troubleshooting", 0));
+        actionAbout_Champion_Manager->setText(QApplication::translate("MainWindow", "About Champion Manager", 0));
         btn_addPrimary->setText(QApplication::translate("MainWindow", "+", 0));
         btn_removePrimary->setText(QApplication::translate("MainWindow", "-", 0));
         btn_addSecondary->setText(QApplication::translate("MainWindow", "+", 0));
@@ -112,6 +143,8 @@ public:
         rad_byCategory->setText(QApplication::translate("MainWindow", "By Category", 0));
         btn_apply->setText(QApplication::translate("MainWindow", "Apply", 0));
         btn_restore->setText(QApplication::translate("MainWindow", "Restore", 0));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
+        menuHelp->setTitle(QApplication::translate("MainWindow", "Help", 0));
     } // retranslateUi
 
 };

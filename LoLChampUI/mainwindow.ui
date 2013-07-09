@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>262</width>
-    <height>561</height>
+    <height>580</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>262</width>
-    <height>561</height>
+    <height>580</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>262</width>
-    <height>561</height>
+    <height>580</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -176,8 +176,45 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="fileSettings"/>
+    <addaction name="separator"/>
+    <addaction name="fileExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionTroubleshooting"/>
+    <addaction name="actionAbout_Champion_Manager"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="fileSettings">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="fileExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionTroubleshooting">
+   <property name="text">
+    <string>Troubleshooting</string>
+   </property>
+  </action>
+  <action name="actionAbout_Champion_Manager">
+   <property name="text">
+    <string>About Champion Manager</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
