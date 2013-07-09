@@ -61,7 +61,7 @@ private:
 	std::vector<LCMCategory> m_categoryInventory;
 	std::vector<std::string> m_championList;
 	std::vector<std::string> m_categoryList;
-	std::string lolRootDirectory;
+	std::string m_lolRootDirectory;
 
 	void getLolDirectory();
 	void listByChampion(void);

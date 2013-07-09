@@ -507,9 +507,15 @@ void MainWindow::on_apply_clicked()
 	m_championGeneratedData->writeResourcesFile(m_categoryList, "asasm\\0.0.1.30\\resources-en_US-1\\en_US$champion_search_tag_resources_properties.class.asasm");
 	m_championGeneratedData->assembleFile();
 
-	int successAirD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf");
-	int successAir = CopyFile(L"asasm\\0.0.1.30\\AirGeneratedContent.swf",
-		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf", false);
+	getLolDirectory();
+
+	std::string airGeneratedRootSuffix = "\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf";
+	std::string path = m_lolRootDirectory + airGeneratedRootSuffix;
+
+	std::wstring stemp = std::wstring(path.begin(), path.end());
+
+	int successAirD = DeleteFile(stemp.c_str());
+	int successAir = CopyFile(L"asasm\\0.0.1.30\\AirGeneratedContent.swf", stemp.c_str(), false);
 	
 /*	int successResourcesD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf");
 	int successResources = CopyFile(L"asasm\\0.0.1.30\\resources-en_US.swf",
@@ -639,6 +645,6 @@ void MainWindow::setAsasmLibrary(asasmlibrary *ChampionGeneratedData)
 /////////////////////////////////////////////////////////////////////////////
 void MainWindow::getLolDirectory()
 {
-
+	m_lolRootDirectory = settingsDialog->getLolRoot();
 }
 /**********************************************************************************************************/
