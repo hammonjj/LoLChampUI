@@ -98,9 +98,10 @@ void MainWindow::updatePrimaryList(bool bPrimaryChampionList)
 		l_primaryList = pullChampionNames();		
 	}
 
-	if(ui->rad_byCategory->isChecked()) 
+	else
 	{
-		l_primaryList = pullCategoryNames();
+		l_primaryList = pullCategoryNames();	
+		checkCategoryCount();
 	}
 
 	m_model->setStringList(l_primaryList);
@@ -246,22 +247,16 @@ void MainWindow::on_comboUpdate()
 		}
 	}	
 
-
 	updateSecondaryList();
 }
 /////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_addPrimary_clicked()
 {
 	if(ui->rad_byCategory->isChecked()) 
-	{
 		newPrimaryDialog->show();
-	}
 
 	else //Currently disabled so users can't remove champions
-	{
 		return;
-	}
-
 }
 
 ///////////////////////////////////////////////////////////////////////////// /* Add removeItem to LCMCategory and LCMChampion */
@@ -297,9 +292,7 @@ void MainWindow::on_removePrimary_clicked()
 	}
 
 	else //Currently disabled so users can't remove champions
-	{
 		return;
-	}
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -477,18 +470,28 @@ void MainWindow::on_removeSecondary_clicked()
 void MainWindow::on_restore_clicked() 
 {
 	//Restore original riot .swf file
-	int successAirD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf");
-	int successAir = CopyFile(L"res\\AirGeneratedContent.swf",
-		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf", false);
+	getLolDirectory();
+
+	//Delete/Copy resources-en_US
+	std::string airGeneratedRootSuffix = "\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf";
+	std::string path = m_lolRootDirectory + airGeneratedRootSuffix;
+	std::wstring stemp = std::wstring(path.begin(), path.end());
+
+	int successAirD = DeleteFile(stemp.c_str());
+	int successAir = CopyFile(L"res\\AirGeneratedContent.swf", stemp.c_str(), false);
 	
-//	int successResourcesD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf");
-//	int successResources = CopyFile(L"res\\resources-en_US.swf",
-//		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf", false);
+	//Delete/Copy resources-en_US
+	std::string resourcesUSSuffix = "\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf";
+	path = m_lolRootDirectory + resourcesUSSuffix;
+	std::wstring stemp = std::wstring(path.begin(), path.end());
 	
+	int successResourcesD = DeleteFile(stemp.c_str());
+	int successResources = CopyFile(L"res\\resources-en_US.swf", stemp.c_str(), false);
+
 	QMessageBox messageBox;
 	std:: string infoMsg;
 
-	if(successAir)
+	if(successAir & successResources)
 		infoMsg = "Successfully updated LoL game files.";
 
 	else
@@ -498,7 +501,7 @@ void MainWindow::on_restore_clicked()
 		messageBox.setFixedSize(500,200);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_apply_clicked() 
 {
 	m_championGeneratedData->insertSearchTags(m_championInventory);
@@ -509,23 +512,26 @@ void MainWindow::on_apply_clicked()
 
 	getLolDirectory();
 
+	//Delete/Copy resources-en_US
 	std::string airGeneratedRootSuffix = "\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\swfs\\AirGeneratedContent.swf";
 	std::string path = m_lolRootDirectory + airGeneratedRootSuffix;
-
 	std::wstring stemp = std::wstring(path.begin(), path.end());
 
 	int successAirD = DeleteFile(stemp.c_str());
 	int successAir = CopyFile(L"asasm\\0.0.1.30\\AirGeneratedContent.swf", stemp.c_str(), false);
 	
-/*	int successResourcesD = DeleteFile(L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf");
-	int successResources = CopyFile(L"asasm\\0.0.1.30\\resources-en_US.swf",
-		L"C:\\Riot Games\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf", false);
-		*/
+	//Delete/Copy resources-en_US
+	std::string resourcesUSSuffix = "\\League of Legends\\RADS\\projects\\lol_air_client\\releases\\0.0.1.30\\deploy\\assets\\locale\\Game\\resources-en_US.swf";
+	path = m_lolRootDirectory + resourcesUSSuffix;
+	std::wstring stemp = std::wstring(path.begin(), path.end());
+	
+	int successResourcesD = DeleteFile(stemp.c_str());
+	int successResources = CopyFile(L"asasm\\0.0.1.30\\resources-en_US.swf", stemp.c_str(), false);
 
 	QMessageBox messageBox;
 	std:: string infoMsg;
 
-	if(successAir)
+	if(successAir & successResources)
 		infoMsg = "Successfully updated LoL game files.";
 
 	else
@@ -537,12 +543,28 @@ void MainWindow::on_apply_clicked()
 }
 
 /////////////////////////////////////////////////////////////////////////////
+void MainWindow::checkCategoryCount() //Ensure someone can't add more than 12 categories or remove when there are 0
+{
+		int categoryCount = ui->list_primary->rowCount();
+		
+		if(categoryCount > 11)
+			ui->btn_addPrimary->setEnabled(false);
+		
+		else
+			ui->btn_addPrimary->setEnabled(true);
+		
+		if(categoryCount == 0)
+			ui->btn_removePrimary->setEnabled(false);
+
+		else
+			ui->btn_removePrimary->setEnabled(true);
+}
+/////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_rad_byCategory_selected(bool checked) 
 {
-	if(checked == true) {
-		ui->btn_addPrimary->setEnabled(true);
-		ui->btn_removePrimary->setEnabled(true);
-
+	if(checked) {
+		checkCategoryCount();
+			
 		clear_secondaryList();
 		updatePrimaryList(false);
 	}
@@ -551,7 +573,7 @@ void MainWindow::on_rad_byCategory_selected(bool checked)
 /////////////////////////////////////////////////////////////////////////////
 void MainWindow::on_rad_byChampion_selected(bool checked) 
 {
-	if(checked == true) {
+	if(checked) {
 		ui->btn_addPrimary->setEnabled(false);
 		ui->btn_removePrimary->setEnabled(false);
 

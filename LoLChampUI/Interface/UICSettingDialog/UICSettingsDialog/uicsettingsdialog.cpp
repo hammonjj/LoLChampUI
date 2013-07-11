@@ -12,6 +12,7 @@ UICSettingsDialog::UICSettingsDialog(QWidget *parent) :
 	findLolDirectory();
 
 	connect(ui->btn_browse,SIGNAL(clicked()),this,SLOT(on_browse()));  
+	connect(ui->btn_apply,SIGNAL(clicked()),this,SLOT(on_apply()));  
 }
 
 UICSettingsDialog::~UICSettingsDialog()
@@ -22,10 +23,16 @@ UICSettingsDialog::~UICSettingsDialog()
 void UICSettingsDialog::on_browse()
 {
 	QString lolRoot = QFileDialog::getExistingDirectory(this, tr("Open Directory"),"C:\\",QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+	ui->directoryEdit->setText(lolRoot);
+}
+
+void UICSettingsDialog::on_apply()
+{
+	QString lolRoot = ui->directoryEdit->text();
+	
 	m_lolRoot = lolRoot.toUtf8();
 	writePathToConfig();
-
-	ui->directoryEdit->setText(lolRoot);
+	close();
 }
 
 void UICSettingsDialog::findLolDirectory()
